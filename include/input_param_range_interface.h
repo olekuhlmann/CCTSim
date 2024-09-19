@@ -18,33 +18,66 @@ class InputParamRangeInterface
 public:
 
     /**
-     * @brief Get the range of the input parameter.
-     * @return The range of the input parameter as a string vector.
+     * @brief Get the column name of the input range.
+     * @return The column name of the as a string.
      * 
-     * Get the range of the input parameter as a string vector to be put into the respective JSON field for this parameter.
+     * Get the column name. This is the name of the column in the output file that will contain the parameter values of this criterion.
      */
-    virtual std::vector<std::string> getRange(){
+    virtual std::string getColumnName(){
+        return column_name_;
+    }
+
+
+    /**
+     * @brief Get the range of the input parameter.
+     * @return The range of the input parameter as a Json::Value vector.
+     * 
+     * Get the range of the input parameter as a Json::Value vector to be put into the respective JSON field for this parameter.
+     */
+    virtual std::vector<Json::Value> getRange(){
         return range_;
     }
 
     /**
-     * @brief Get the identifier of the input parameter.
-     * @return The identifier of the input parameter as a string.
+     * @brief Get the JSON name for the input parameter.
+     * @return The JSON name for the input parameter as a string.
      * 
-     * Get the identifier of the input parameter. This is either the name of a JSON field or the type of the JSON field, depending on the `isIdentifiableByName` function.
+     * The location of this input parameter in a JSON file is characterized by the JSON name, JSON children and JSON target.
+     * To find the location, the model handler will search for a node in the JSON tree with the specified name, than traverse the children and 
+     * find the JSON target property of the last child.
+     * 
+     * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
      */
-    virtual std::string getIdentifier(){
-        return identifier_;
+    virtual std::string getJSONName(){
+        return JSON_name_;
     }
 
     /**
-     * @brief Check if the input parameter is identifiable by name.
-     * @return True if the input parameter is identifiable by name, false otherwise.
+     * @brief Get the JSON children to locate the input parameter.
+     * @return The JSON children for the  input parameter as a vector of strings.
      * 
-     * Check if the input parameter is identifiable by name. If true, the identifier is the name of the JSON field. If false, the identifier is the type of the JSON field.
+     * The location of this input parameter in a JSON file is characterized by the JSON name, JSON children and JSON target.
+     * To find the location, the model handler will search for a node in the JSON tree with the specified name, than traverse the children and 
+     * find the JSON target property of the last child.
+     * 
+     * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
      */
-    virtual bool isIdentifiableByName(){
-        return is_identifiable_by_name_;
+    virtual std::vector<std::string> getJSONChildren(){
+        return JSON_children_;
+    }
+
+    /**
+     * @brief Get the JSON target for the input parameter.
+     * @return The JSON target for the input parameter as a string.
+     * 
+     * The location of this input parameter in a JSON file is characterized by the JSON name, JSON children and JSON target.
+     * To find the location, the model handler will search for a node in the JSON tree with the specified name, than traverse the children and 
+     * find the JSON target property of the last child.
+     * 
+     * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
+     */
+    virtual std::string getJSONTarget(){
+        return JSON_target_;
     }
 
     virtual ~InputParamRangeInterface() = default;
@@ -53,9 +86,11 @@ protected:
     
         InputParamRangeInterface() = default;
 
-        std::vector<std::string> range_;
-        std::string identifier_;
-        bool is_identifiable_by_name_;        
+        std::string column_name_;
+        std::vector<Json::Value> range_;
+        std::string JSON_name_;
+        std::vector<std::string> JSON_children_;
+        std::string JSON_target_;
 
 };
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <filesystem>
+#include <json/json.h>
 #include <constants.h>
 #include <model_handler.h>
 #include <model_calculator.h>
@@ -51,13 +52,21 @@ private:
     void closeOutputFile();
 
     /**
+     * @brief Check if the input parameters are valid.
+     * @param inputParamsRanges The input parameter ranges.
+     * 
+     * Check if the input parameters are valid, i.e. if every input parameter target can be located in the JSON file. Throws an exception if the input parameters are not valid.
+     */
+    void checkInputParams(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges);
+
+    /**
      * @brief Get the parameter ranges from all input parameters.
      * @param inputParamsRanges The input parameter ranges.
-     * @return The parameter ranges as a string vector.
+     * @return The parameter ranges as a Json::Value vector.
      *
      * Get the parameter ranges from all input parameters as a string vector to be put into the respective JSON field for these parameters.
      */
-    static std::vector<std::vector<std::string>> getParamRanges(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges);
+    static std::vector<std::vector<Json::Value>> getParamRanges(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges);
 
     /**
      * @brief Get the number of steps in the grid search.
@@ -66,7 +75,7 @@ private:
      *
      * Get the number of steps in the grid search by multiplying the number of steps in each parameter range.
      */
-    static size_t getNumSteps(const std::vector<std::vector<std::string>> &param_ranges);
+    static size_t getNumSteps(const std::vector<std::vector<Json::Value>> &param_ranges);
 
     /**
      * @brief Get the required calculations for the output criteria.
@@ -79,22 +88,33 @@ private:
      * @brief Apply the parameter configuration.
      * @param inputParamsRanges The input parameter ranges.
      * @param step_num The current step number.
-     * @param param_ranges The string vector representation of the input parameter ranges.
+     * @param param_ranges The Json::Value vector representation of the input parameter ranges.
      * @param modelHandler The model handler.
      *
      * Pass the parameter configuration for the step number to the model handler.
      */
-    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, size_t step_num, std::vector<std::vector<std::string>> &param_ranges, CCTools::ModelHandler &modelHandler);
+    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, size_t step_num, std::vector<std::vector<Json::Value>> &param_ranges, CCTools::ModelHandler &modelHandler);
 
     /**
+     * @brief Get the next parameter configuration.
+     * @param step_num The current step number (0-indexed).
+     * @param param_ranges The JSON::Value vector representation of the input parameter ranges.
+     * @return The parameter configuration as a vector of `Json::Value`
+     * 
+     * Get the parameter configuration for the step `step_num` of the parameter search.
+     * The parameter confguration is selected based on a grid search approach. 
+     */
+    static std::vector<Json::Value> getParameterConfiguration(size_t step_num, std::vector<std::vector<Json::Value>> &param_ranges);
+    /**
      * @brief Run the necessary calculations for the output criteria.
-     * @param required_calculations Type info of the required calculation handlers for the output criteria.
+     * @param required_calculations Type info of the required calculation handlers for the output criteria. Is assumed to be duplicate-free.
      * @param modelCalculator The model calculator.
+     * @param modelHandler The model handler.
      * @return The calculation results as a vector of shared pointers to CalcResultHandlerBase.
      *
      * Run the necessary calculations for the output criteria and return the results as a vector of shared pointers to CalcResultHandlerBase.
      */
-    static std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> runCalculations(std::vector<std::type_info> required_calculations, CCTools::ModelCalculator &modelCalculator);
+    static std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> runCalculations(std::vector<std::type_info> required_calculations, CCTools::ModelCalculator &modelCalculator, CCTools::ModelHandler &modelHandler);
 
     /**
      * @brief Compute the output criteria.
@@ -114,7 +134,7 @@ private:
      *
      * Write the values of the output criteria for the current step to the output file. Assumes that file is present and open.
      */
-    static void writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<double> &output_values);
+    void writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<double> &output_values);
 
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputParamsRanges_;
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputCriteria_;
