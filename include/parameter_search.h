@@ -80,9 +80,9 @@ private:
     /**
      * @brief Get the required calculations for the output criteria.
      * @param outputCriteria The output criteria.
-     * @return The required calculation handlers for the output criteria as a type info vector.
+     * @return The required calculation handlers for the output criteria as a type index vector.
      */
-    static std::vector<std::type_info> getRequiredCalculations(std::vector<std::shared_ptr<OutputCriterionInterface>> &outputCriteria);
+    static std::vector<std::type_index> getRequiredCalculations(std::vector<std::shared_ptr<OutputCriterionInterface>> &outputCriteria);
 
     /**
      * @brief Apply the parameter configuration.
@@ -114,7 +114,7 @@ private:
      *
      * Run the necessary calculations for the output criteria and return the results as a vector of shared pointers to CalcResultHandlerBase.
      */
-    static std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> runCalculations(std::vector<std::type_info> required_calculations, CCTools::ModelCalculator &modelCalculator, CCTools::ModelHandler &modelHandler);
+    static std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> runCalculations(std::vector<std::type_index> required_calculations, CCTools::ModelCalculator &modelCalculator, CCTools::ModelHandler &modelHandler);
 
     /**
      * @brief Compute the output criteria.

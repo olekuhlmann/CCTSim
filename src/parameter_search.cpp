@@ -31,7 +31,7 @@ void ParameterSearch::run()
     Logger::info("Number of steps: " + std::to_string(num_steps));
 
     // Check what computations are necessary for the output criteria
-    std::vector<std::type_info> required_calculations_ = getRequiredCalculations(outputCriteria_);
+    std::vector<std::type_index> required_calculations_ = getRequiredCalculations(outputCriteria_);
 
     // Loop over all steps
     for (size_t step_num = 0; step_num < num_steps; step_num++)
@@ -143,7 +143,7 @@ size_t ParameterSearch::getNumSteps(const std::vector<std::vector<Json::Value>> 
     return num_steps;
 }
 
-std::vector<std::type_info> ParameterSearch::getRequiredCalculations(std::vector<std::shared_ptr<OutputCriterionInterface>> &outputCriteria)
+std::vector<std::type_index> ParameterSearch::getRequiredCalculations(std::vector<std::shared_ptr<OutputCriterionInterface>> &outputCriteria)
 {
     // Use a set to avoid duplicates
     std::set<std::type_info, std::less<>> unique_calculations;
@@ -151,12 +151,12 @@ std::vector<std::type_info> ParameterSearch::getRequiredCalculations(std::vector
     // Get the required calculations for each output criterion
     for (size_t i = 0; i < outputCriteria.size(); i++)
     {
-        std::vector<std::type_info> criterion_calculations = outputCriteria[i]->getRequiredCalculations();
+        std::vector<std::type_index> criterion_calculations = outputCriteria[i]->getRequiredCalculations();
         unique_calculations.insert(criterion_calculations.begin(), criterion_calculations.end());
     }
 
     // Convert the set to a vector
-    std::vector<std::type_info> required_calculations(unique_calculations.begin(), unique_calculations.end());
+    std::vector<std::type_index> required_calculations(unique_calculations.begin(), unique_calculations.end());
 
     // Log the required calculations
     std::string required_calculations_str = "Required calculations: ";
@@ -253,16 +253,16 @@ std::vector<Json::Value> ParameterSearch::getParameterConfiguration(size_t step_
     return configuration;
 }
 
-std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> ParameterSearch::runCalculations(std::vector<std::type_info> required_calculations, CCTools::ModelCalculator &modelCalculator, CCTools::ModelHandler &modelHandler)
+std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> ParameterSearch::runCalculations(std::vector<std::type_index> required_calculations, CCTools::ModelCalculator &modelCalculator, CCTools::ModelHandler &modelHandler)
 {
     // Return vector
     std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calc_results;
 
     // Check all required calculations
-    for (const std::type_info &type : required_calculations)
+    for (const std::type_index &type : required_calculations)
     {
         // Check for harmonics calculation
-        if (type == typeid(CCTools::HarmonicsDataHandler))
+        if (type == std::type_index(typeid(CCTools::HarmonicsDataHandler)))
         {
             // Run
             CCTools::HarmonicsDataHandler handler;
@@ -270,7 +270,7 @@ std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> ParameterSearch::ru
             calc_results.push_back(std::make_shared<CCTools::HarmonicsDataHandler>(handler));
         }
         // Check for mesh calculation
-        else if (type == typeid(CCTools::MeshDataHandler))
+        else if (type == std::type_index(typeid(CCTools::MeshDataHandler)))
         {
             // Run
             CCTools::MeshDataHandler handler;
@@ -298,16 +298,16 @@ std::vector<double> ParameterSearch::computeCriteria(std::vector<std::shared_ptr
         OutputCriterionInterface &output_criterion = *output_criterion_ptr;
 
         // Get required calculation results
-        std::vector<std::type_info> required_calc_results = output_criterion.getRequiredCalculations();
+        std::vector<std::type_index> required_calc_results = output_criterion.getRequiredCalculations();
 
         // Find each required calculation result
         std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> criterion_calc_results;
-        for (const std::type_info &required_calc_result : required_calc_results)
+        for (const std::type_index &required_calc_result : required_calc_results)
         {
             bool found = false;
             for (auto &calc_result : calcResults)
             {
-                if (typeid(*calc_result) == required_calc_result)
+                if (std::type_index(typeid(*calc_result)) == required_calc_result)
                 {
                     criterion_calc_results.push_back(calc_result);
                     found = true;

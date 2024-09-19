@@ -37,7 +37,7 @@ public:
      * Get the type info of the CCTools calculation result handlers (harmonics, mesh, ...) that are required for this criterion.
      * These handlers will be passed to this object in order to compute the value of the output criterion.
      */
-    virtual std::vector<std::type_info> getRequiredCalculations(){
+    virtual std::vector<std::type_index> getRequiredCalculations(){
         return required_calculations_;
     }
 
@@ -66,7 +66,7 @@ public:
 
         // Check if the types of the calculation result handlers match the required types in the correct order
         for (size_t i = 0; i < calcResults.size(); i++){
-            if (typeid(*calcResults[i]) != required_calculations_[i]){
+            if (std::type_index(typeid(*calcResults[i])) != required_calculations_[i]){
                 return false;
             }
         }
@@ -80,7 +80,7 @@ protected:
     OutputCriterionInterface() = default;
 
     std::string column_name_;
-    std::vector<std::type_info> required_calculations_;
+    std::vector<std::type_index> required_calculations_;
 
 };
 
