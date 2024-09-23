@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <typeindex>
+#include <json/json.h>
 
 /**
  * @interface InputParamRangeInterface
