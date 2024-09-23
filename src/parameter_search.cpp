@@ -161,19 +161,6 @@ std::vector<std::type_index> ParameterSearch::getRequiredCalculations(std::vecto
     // Convert the set to a vector
     std::vector<std::type_index> required_calculations(unique_calculations.begin(), unique_calculations.end());
 
-    // Log the required calculations
-    std::string required_calculations_str = "Required calculations: ";
-    for (size_t i = 0; i < required_calculations.size(); i++)
-    {
-        required_calculations_str += required_calculations[i].name();
-        if (i < required_calculations.size() - 1)
-        {
-            required_calculations_str += ", ";
-        }
-    }
-
-    Logger::info(required_calculations_str);
-
     return required_calculations;
 }
 
