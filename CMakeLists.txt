@@ -44,6 +44,17 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(CCTools)
 
+# Fetch googletest
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/release-1.12.1.tar.gz
+)
+
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(googletest)
+
 
 # Get all source files in src directory
 file(GLOB CCTSIM_SOURCES "src/*.cpp")
@@ -65,7 +76,7 @@ enable_testing()
 # Create the test executable
 add_executable(cctsim_test ${CCTSIM_SOURCES} ${CCTSIM_TEST_SOURCES})
 target_include_directories(cctsim_test PRIVATE)
-target_link_libraries(cctsim_test PRIVATE gtest_main CCTools)
+target_link_libraries(cctsim_test PRIVATE GTest::gtest_main CCTools)
 
 # Add tests
 add_test(NAME cctsim_test COMMAND cctsim_test)
