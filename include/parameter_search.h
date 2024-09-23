@@ -89,13 +89,12 @@ private:
     /**
      * @brief Apply the parameter configuration.
      * @param inputParamsRanges The input parameter ranges.
-     * @param step_num The current step number.
-     * @param param_ranges The Json::Value vector representation of the input parameter ranges.
+     * @param next_config The next input parameter configuration.
      * @param modelHandler The model handler.
      *
      * Pass the parameter configuration for the step number to the model handler.
      */
-    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, size_t step_num, std::vector<std::vector<Json::Value>> &param_ranges, CCTools::ModelHandler &modelHandler);
+    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> next_config, CCTools::ModelHandler &model_handler);
 
     /**
      * @brief Get the next parameter configuration.
@@ -132,11 +131,12 @@ private:
      * @brief Write the step results to the output file.
      * @param step_num The current step number.
      * @param outputFile The output file stream.
+     * @param input_values The input parameter values.
      * @param output_values The values of the output criteria.
      *
      * Write the values of the output criteria for the current step to the output file. Assumes that file is present and open.
      */
-    void writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<double> &output_values);
+    void writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<Json::Value> &input_values, std::vector<double> &output_values);
 
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputParamsRanges_;
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputCriteria_;

@@ -38,8 +38,11 @@ void ParameterSearch::run()
     {
         Logger::info("== Starting step with index " + std::to_string(step_num) + " / " + std::to_string(num_steps - 1) + " ==");
 
+        // Get the next input param configuration
+        std::vector<Json::Value> next_config = getParameterConfiguration(step_num, param_ranges);
+
         // Apply paramater configuration for the current step
-        applyParameterConfiguration(inputParamsRanges_, step_num, param_ranges, modelHandler_);
+        applyParameterConfiguration(inputParamsRanges_, next_config, modelHandler_);
 
         // Run the necessary calculations
         std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calc_results = runCalculations(required_calculations_, modelCalculator_, modelHandler_);
@@ -48,7 +51,7 @@ void ParameterSearch::run()
         std::vector<double> output_values = computeCriteria(calc_results, outputCriteria_);
 
         // Write the output values to the output file
-        writeStepToOutputFile(step_num, outputFile_, output_values);
+        writeStepToOutputFile(step_num, outputFile_, next_config, output_values);
     }
 
     // Close the output file
@@ -102,8 +105,14 @@ void ParameterSearch::initOutputFile()
     // Create the output file
     outputFile_.open(output_file_path);
 
-    // Write the index and the column names of the output criteria to the file
+    // Write the index and the column names of the input params and output criteria to the file
     outputFile_ << "index,";
+    // input params
+    for (size_t i = 0; i < inputParamsRanges_.size(); i++)
+    {
+        outputFile_ << inputParamsRanges_[i]->getColumnName() << ",";
+    }
+    // output criteria
     for (size_t i = 0; i < outputCriteria_.size(); i++)
     {
         outputFile_ << outputCriteria_[i]->getColumnName();
@@ -164,10 +173,8 @@ std::vector<std::type_index> ParameterSearch::getRequiredCalculations(std::vecto
     return required_calculations;
 }
 
-void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, size_t step_num, std::vector<std::vector<Json::Value>> &param_ranges, CCTools::ModelHandler &model_handler)
+void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> next_config, CCTools::ModelHandler &model_handler)
 {
-    // Get the next configuration
-    std::vector<Json::Value> next_config = getParameterConfiguration(step_num, param_ranges);
 
     // Apply param config
     for (size_t i = 0; i < inputParamsRanges.size(); i++)
@@ -320,10 +327,16 @@ std::vector<double> ParameterSearch::computeCriteria(std::vector<std::shared_ptr
     return output_values;
 }
 
-void ParameterSearch::writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<double> &output_values)
+void ParameterSearch::writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<Json::Value> &input_values, std::vector<double> &output_values)
 {
     // Write the step number
     outputFile << step_num << ",";
+
+    // Write the input values
+    for (size_t i = 0; i < input_values.size(); i++)
+    {
+        outputFile << input_values[i] << ",";
+    }
 
     // Write the output values
     for (size_t i = 0; i < output_values.size(); i++)
