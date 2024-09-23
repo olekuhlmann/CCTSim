@@ -36,7 +36,7 @@ void ParameterSearch::run()
     // Loop over all steps
     for (size_t step_num = 0; step_num < num_steps; step_num++)
     {
-        Logger::info("== Starting step with index" + std::to_string(step_num) + " of " + std::to_string(num_steps - 1) + " ==");
+        Logger::info("== Starting step with index " + std::to_string(step_num) + " / " + std::to_string(num_steps - 1) + " ==");
 
         // Apply paramater configuration for the current step
         applyParameterConfiguration(inputParamsRanges_, step_num, param_ranges, modelHandler_);
@@ -314,7 +314,7 @@ std::vector<double> ParameterSearch::computeCriteria(std::vector<std::shared_ptr
         // Compute the output criterion
         double output_value = output_criterion.computeCriterion(criterion_calc_results);
         output_values.push_back(output_value);
-        Logger::info_double("Computed output criterion " + output_criterion.getColumnName() + ": ", output_value);
+        Logger::info_double("Computed output criterion " + output_criterion.getColumnName(), output_value);
     }
 
     return output_values;
