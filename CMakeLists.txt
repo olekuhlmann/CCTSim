@@ -46,29 +46,29 @@ FetchContent_MakeAvailable(CCTools)
 
 
 # Get all source files in src directory
-file(GLOB SOURCES "src/*.cpp")
-list(REMOVE_ITEM SOURCES "${CMAKE_SOURCE_DIR}/src/main.cpp")
+file(GLOB CCTSIM_SOURCES "src/*.cpp")
+list(REMOVE_ITEM CCTSIM_SOURCES "${CMAKE_SOURCE_DIR}/src/main.cpp")
 
 
 # Create the main executable
-add_executable(main ${CMAKE_SOURCE_DIR}/src/main.cpp ${SOURCES})
-target_include_directories(main PRIVATE)
-target_link_libraries(main PRIVATE CCTools)
+add_executable(cctsim_main ${CMAKE_SOURCE_DIR}/src/main.cpp ${CCTSIM_SOURCES})
+target_include_directories(cctsim_main PRIVATE)
+target_link_libraries(cctsim_main PRIVATE CCTools)
 
 
 # Get all test files in test directory
-file(GLOB TEST_SOURCES "test/*.cpp")
+file(GLOB CCTSIM_TEST_SOURCES "test/*.cpp")
 
 # Enable testing
 enable_testing()
 
 # Create the test executable
-add_executable(runTests ${SOURCES} ${TEST_SOURCES})
-target_include_directories(runTests PRIVATE)
-target_link_libraries(runTests PRIVATE gtest_main CCTools)
+add_executable(cctsim_test ${CCTSIM_SOURCES} ${CCTSIM_TEST_SOURCES})
+target_include_directories(cctsim_test PRIVATE)
+target_link_libraries(cctsim_test PRIVATE gtest_main CCTools)
 
 # Add tests
-add_test(NAME runTests COMMAND runTests)
+add_test(NAME cctsim_test COMMAND cctsim_test)
 
 # Suppress DartConfiguration.tcl warnings
 set(CMAKE_SUPPRESS_REGENERATION true)
