@@ -10,9 +10,6 @@ ParameterSearch::ParameterSearch(std::vector<std::shared_ptr<InputParamRangeInte
 
     // Check if the input params are valid
     checkInputParams(inputParamsRanges_);
-
-    // Run the parameter search
-    run();
 }
 
 void ParameterSearch::run()

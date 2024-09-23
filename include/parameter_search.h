@@ -37,7 +37,7 @@ public:
      */
     void run();
 
-private:
+protected:
     /**
      * @brief Initialize the output file.
      * @return The path to the output file.
@@ -57,7 +57,7 @@ private:
     /**
      * @brief Check if the input parameters are valid.
      * @param inputParamsRanges The input parameter ranges.
-     * 
+     *
      * Check if the input parameters are valid, i.e. if every input parameter target can be located in the JSON file. Throws an exception if the input parameters are not valid.
      */
     void checkInputParams(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges);
@@ -102,9 +102,9 @@ private:
      * @param step_num The current step number (0-indexed).
      * @param param_ranges The JSON::Value vector representation of the input parameter ranges.
      * @return The parameter configuration as a vector of `Json::Value`
-     * 
+     *
      * Get the parameter configuration for the step `step_num` of the parameter search.
-     * The parameter confguration is selected based on a grid search approach. 
+     * The parameter confguration is selected based on a grid search approach.
      */
     static std::vector<Json::Value> getParameterConfiguration(size_t step_num, std::vector<std::vector<Json::Value>> &param_ranges);
     /**
@@ -139,6 +139,7 @@ private:
      */
     void writeStepToOutputFile(size_t step_num, std::ofstream &outputFile, std::vector<Json::Value> &input_values, std::vector<double> &output_values);
 
+private:
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputParamsRanges_;
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputCriteria_;
     std::ofstream outputFile_;
