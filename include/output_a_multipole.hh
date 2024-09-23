@@ -22,7 +22,7 @@ public:
         required_calculations_ = {std::type_index(typeid(CCTools::HarmonicsDataHandler))};
     }
 
-    double OutputAMultipole::computeCriterion(std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calcResults){
+    double computeCriterion(std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calcResults){
         // Assert that the passed calculation result handlers are of the correct type
         if (!checkCalcResultHandlerTypes(calcResults)){
             throw std::runtime_error("Calculation result handlers of the wrong type have been passed to the output A multipole criterion.");
