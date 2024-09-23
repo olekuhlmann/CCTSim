@@ -146,7 +146,7 @@ size_t ParameterSearch::getNumSteps(const std::vector<std::vector<Json::Value>> 
 std::vector<std::type_index> ParameterSearch::getRequiredCalculations(std::vector<std::shared_ptr<OutputCriterionInterface>> &outputCriteria)
 {
     // Use a set to avoid duplicates
-    std::set<std::type_info, std::less<>> unique_calculations;
+    std::set<std::type_index, std::less<>> unique_calculations;
 
     // Get the required calculations for each output criterion
     for (size_t i = 0; i < outputCriteria.size(); i++)
