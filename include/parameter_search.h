@@ -40,11 +40,12 @@ public:
 private:
     /**
      * @brief Initialize the output file.
+     * @return The path to the output file.
      *
      * Initialize the output CSV file with the column names of the output criteria and keeps the file open.
      * Will create the output folder if it does not exist.
      */
-    void initOutputFile();
+    std::string initOutputFile();
 
     /**
      * @brief Close the output file.

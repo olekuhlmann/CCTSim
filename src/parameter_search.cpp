@@ -20,7 +20,7 @@ void ParameterSearch::run()
     Logger::info("=== Starting parameter search ===");
 
     // Initialize the output file
-    initOutputFile();
+    std::string output_file_path = initOutputFile();
 
     // Get all parameter ranges
     std::vector<std::vector<Json::Value>> param_ranges = getParamRanges(inputParamsRanges_);
@@ -56,6 +56,9 @@ void ParameterSearch::run()
 
     // Close the output file
     closeOutputFile();
+
+    Logger::info("=== Finished parameter search ===");
+    Logger::info("All results been saved to the output file " + output_file_path);
 }
 
 void ParameterSearch::checkInputParams(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges)
@@ -84,7 +87,7 @@ void ParameterSearch::checkInputParams(std::vector<std::shared_ptr<InputParamRan
     Logger::info("All input parameters are valid.");
 }
 
-void ParameterSearch::initOutputFile()
+std::string ParameterSearch::initOutputFile()
 {
     // Check if the output directory exists
     if (!std::filesystem::exists(OUTPUT_DIR_PATH))
@@ -126,6 +129,8 @@ void ParameterSearch::initOutputFile()
     outputFile_ << std::endl;
 
     Logger::info("Output file initialized: " + output_file_path);
+
+    return output_file_path;
 }
 
 std::vector<std::vector<Json::Value>> ParameterSearch::getParamRanges(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges)
