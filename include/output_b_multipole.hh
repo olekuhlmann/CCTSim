@@ -5,7 +5,7 @@
 #include "harmonics_data_handler.h"
 #include <json/json.h>
 
-class OutputBMultipole : OutputCriterionInterface {
+class OutputBMultipole : public OutputCriterionInterface {
 public:
 
     /**

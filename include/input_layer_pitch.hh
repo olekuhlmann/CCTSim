@@ -4,7 +4,7 @@
 #include "input_param_range_interface.h"
 #include <json/json.h>
 
-class InputLayerPitch : InputParamRangeInterface {
+class InputLayerPitch : public InputParamRangeInterface {
 public:
 
     /**
