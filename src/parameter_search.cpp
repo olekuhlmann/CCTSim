@@ -90,11 +90,14 @@ void ParameterSearch::initOutputFile()
     }
 
     // Create the output file name with the current date and time
-    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::string date_time = std::ctime(&now);
-    std::replace(date_time.begin(), date_time.end(), ' ', '_');
-    std::replace(date_time.begin(), date_time.end(), ':', '-');
-    std::string output_file_path = OUTPUT_DIR_PATH + "output_" + date_time + ".csv";
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    std::tm now_tm = *std::localtime(&now_time_t);
+
+    std::ostringstream oss;
+    oss << OUTPUT_DIR_PATH << "CCTSim_output_" << std::put_time(&now_tm, "%Y_%m_%d_%H_%M_%S") << ".csv";
+
+    std::string output_file_path = oss.str();
 
     // Create the output file
     outputFile_.open(output_file_path);

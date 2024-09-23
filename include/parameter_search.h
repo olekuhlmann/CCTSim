@@ -8,6 +8,8 @@
 #include <constants.h>
 #include <model_handler.h>
 #include <model_calculator.h>
+#include <iomanip>
+#include <sstream>
 #include "input_param_range_interface.h"
 #include "output_criterion_interface.h"
 
