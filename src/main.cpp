@@ -6,6 +6,8 @@
 #include "output_criterion_interface.h"
 #include "output_b_multipole.hh"
 #include "output_a_multipole.hh"
+#include "output_max_z.hh"
+#include "output_min_z.hh"
 #include "parameter_search.h"
 #include "model_handler.h"
 #include "json_range.hh"
@@ -14,14 +16,14 @@ int main()
 {
 
     // Set path to model file
-    std::string model_path = DATA_DIR_PATH + "Sextupole_prototype_ConnectV2_56_5mm_V5.json";
+    std::string model_path = DATA_DIR_PATH + "Sextupole_prototype_ConnectV2_56_5mm_V5_noLead_V2.json";
     CCTools::ModelHandler modelHandler(model_path);
 
     // Set input parameters
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputs;
 
     InputLayerPitch pitch_outer("custom cct outer", {2.05}, "_outer");
-    InputLayerPitch pitch_inner("custom cct inner", JsonRange::double_linear(2, 2.2, 10000), "_inner");
+    InputLayerPitch pitch_inner("custom cct inner", {2.14697469746974}, "_inner");
 
     inputs.push_back(std::make_shared<InputParamRangeInterface>(pitch_outer));
     inputs.push_back(std::make_shared<InputParamRangeInterface>(pitch_inner));
@@ -39,6 +41,9 @@ int main()
     {
         outputs.push_back(std::make_shared<OutputBMultipole>(OutputBMultipole(i)));
     }
+
+    outputs.push_back(std::make_shared<OutputMinZ>(OutputMinZ()));
+    outputs.push_back(std::make_shared<OutputMaxZ>(OutputMaxZ()));
 
     // Run grid search
     ParameterSearch search(inputs, outputs, modelHandler);

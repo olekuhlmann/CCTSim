@@ -2,6 +2,7 @@
 #include "parameter_search.h"
 #include "input_layer_pitch.hh"
 #include "input_param_range_interface.h"
+#include "input_multipole_scaling.hh"
 #include "output_criterion_interface.h"
 #include "output_a_multipole.hh"
 #include "output_b_multipole.hh"
@@ -72,6 +73,24 @@ protected:
 TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForValidInputs) {
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs, outputs, *modelHandler);
+    });
+}
+
+TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
+    // Give all types of inputs
+    std::string modelPath = TEST_DATA_DIR + "quad_test_B3_linear.json";
+
+    // Create model handler
+    CCTools::ModelHandler model_handler = CCTools::ModelHandler(modelPath);
+
+    std::vector<std::shared_ptr<InputParamRangeInterface>> inputs_new = inputs;
+
+    inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b1", "B1", HarmonicScalingFunctionTarget::CONST, std::vector<Json::Value>{0.0}));
+    inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b3", "B3", HarmonicScalingFunctionTarget::LINEAR_OFFSET, std::vector<Json::Value>{0.0}));
+    inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b3", "B3", HarmonicScalingFunctionTarget::LINEAR_SLOPE, std::vector<Json::Value>{0.0}));
+
+    EXPECT_NO_THROW({
+        TestableParameterSearch search(inputs_new, outputs, model_handler);
     });
 }
 
