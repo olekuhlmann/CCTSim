@@ -18,6 +18,20 @@ enum HarmonicScalingFunctionTarget {
     LINEAR_SLOPE
 };
 
+// To string function for HarmonicScalingFunctionTarget that returns the string representation of the enum value
+std::string to_string(HarmonicScalingFunctionTarget target) {
+    switch (target) {
+        case CONST:
+        return "CONST";
+        case LINEAR_OFFSET:
+        return "LINEAR_OFFSET";
+        case LINEAR_SLOPE:
+        return "LINEAR_SLOPE";
+        default:
+        throw std::invalid_argument("Invalid HarmonicScalingFunctionTarget value");
+    }
+}
+
 class InputMultipoleScaling : public InputParamRangeInterface {
 public:
 
@@ -27,13 +41,14 @@ public:
      * @param JSON_name The 'name' field of the custom CCT harmonic (rat::mdl::cctharmonicdrive).
      * @param scaling_function_target The targeted scaling function value of the custom harmonic.
      * @param value_range The range of the targeted value [m] or [m/coil].
-     * @param column_name_suffix The suffix to be added to the column name in the output file. Default column name is the value of `multipole`.
+     * @param column_name_suffix The suffix to be added to the column name in the output file. Default column name is `multipole` + `scaling_function_target`.
      * 
      * Initialize an InputMultipoleScaling object to define the parameter range for a scaling function value of a custom CCT harmonic.
      * Values are to be provided in [m] or [m/coil], depending on the type of target.
      */
     InputMultipoleScaling(std::string multipole, std::string JSON_name, HarmonicScalingFunctionTarget scaling_function_target, std::vector<Json::Value> value_range, std::string column_name_suffix="") {
-        column_name_ = multipole + column_name_suffix;
+        column_name_ = multipole + "_" + to_string(scaling_function_target) + column_name_suffix;
+
 
         JSON_name_ = JSON_name;
         JSON_children_ = {"harmonic_drive"};
