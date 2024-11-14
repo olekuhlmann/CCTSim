@@ -5,6 +5,7 @@
 #include <string>
 #include <typeindex>
 #include <json/json.h>
+#include <model_handler.h>
 
 /**
  * @interface InputParamRangeInterface
@@ -48,6 +49,7 @@ public:
      * find the JSON target property of the last child.
      * 
      * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
+     * setValueByName("Connect South V2", {"uvw1", 0}, "u", 0.1) will find "Connect South V2", traverse the children "uvw1", traverse to the first element of its array and set the 'u' value.
      */
     virtual std::string getJSONName(){
         return JSON_name_;
@@ -55,29 +57,31 @@ public:
 
     /**
      * @brief Get the JSON children to locate the input parameter.
-     * @return The JSON children for the  input parameter as a vector of strings.
+     * @return The JSON children for the  input parameter as a vector of CCTools::JSONChildrenIdentifierType.
      * 
      * The location of this input parameter in a JSON file is characterized by the JSON name, JSON children and JSON target.
      * To find the location, the model handler will search for a node in the JSON tree with the specified name, than traverse the children and 
      * find the JSON target property of the last child.
      * 
      * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
+     * setValueByName("Connect South V2", {"uvw1", 0}, "u", 0.1) will find "Connect South V2", traverse the children "uvw1", traverse to the first element of its array and set the 'u' value.
      */
-    virtual std::vector<std::string> getJSONChildren(){
+    virtual std::vector<CCTools::JSONChildrenIdentifierType> getJSONChildren(){
         return JSON_children_;
     }
 
     /**
      * @brief Get the JSON target for the input parameter.
-     * @return The JSON target for the input parameter as a string.
+     * @return The JSON target for the input parameter as a CCTools::JSONChildrenIdentifierType.
      * 
      * The location of this input parameter in a JSON file is characterized by the JSON name, JSON children and JSON target.
      * To find the location, the model handler will search for a node in the JSON tree with the specified name, than traverse the children and 
      * find the JSON target property of the last child.
      * 
      * E.g., name="Inner Layer", children={"rho"}, target="radius" specifies the 'radius' property of a node called 'rho', which is a child of a node with the 'name' property 'Inner Layer'.
+     * setValueByName("Connect South V2", {"uvw1", 0}, "u", 0.1) will find "Connect South V2", traverse the children "uvw1", traverse to the first element of its array and set the 'u' value.
      */
-    virtual std::string getJSONTarget(){
+    virtual CCTools::JSONChildrenIdentifierType getJSONTarget(){
         return JSON_target_;
     }
 
@@ -90,8 +94,8 @@ protected:
         std::string column_name_;
         std::vector<Json::Value> range_;
         std::string JSON_name_;
-        std::vector<std::string> JSON_children_;
-        std::string JSON_target_;
+        std::vector<CCTools::JSONChildrenIdentifierType> JSON_children_;
+        CCTools::JSONChildrenIdentifierType JSON_target_;
 
 };
 

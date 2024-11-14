@@ -65,8 +65,8 @@ void ParameterSearch::checkInputParams(std::vector<std::shared_ptr<InputParamRan
     {
         // Get JSON location of the target
         std::string JSON_name = (*inputParamsRanges[i]).getJSONName();
-        std::vector<std::string> JSON_children = (*inputParamsRanges[i]).getJSONChildren();
-        std::string JSON_target = (*inputParamsRanges[i]).getJSONTarget();
+        std::vector<CCTools::JSONChildrenIdentifierType> JSON_children = (*inputParamsRanges[i]).getJSONChildren();
+        CCTools::JSONChildrenIdentifierType JSON_target = (*inputParamsRanges[i]).getJSONTarget();
 
         // Try to get the value, this will throw an exception if the value cannot be found
         try
@@ -183,8 +183,8 @@ void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<In
     {
         // Get JSON location of the target
         std::string JSON_name = (*inputParamsRanges[i]).getJSONName();
-        std::vector<std::string> JSON_children = (*inputParamsRanges[i]).getJSONChildren();
-        std::string JSON_target = (*inputParamsRanges[i]).getJSONTarget();
+        std::vector<CCTools::JSONChildrenIdentifierType> JSON_children = (*inputParamsRanges[i]).getJSONChildren();
+        CCTools::JSONChildrenIdentifierType JSON_target = (*inputParamsRanges[i]).getJSONTarget();
         Json::Value value = next_config[i];
 
         // Apply the parameter configuration

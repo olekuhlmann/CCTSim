@@ -3,6 +3,7 @@
 #include "input_layer_pitch.hh"
 #include "input_param_range_interface.h"
 #include "input_multipole_scaling.hh"
+#include "input_pathconnectv2_value.hh"
 #include "output_criterion_interface.h"
 #include "output_a_multipole.hh"
 #include "output_b_multipole.hh"
@@ -88,6 +89,11 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
     inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b1", "B1", HarmonicScalingFunctionTarget::CONST, std::vector<Json::Value>{0.0}));
     inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b3", "B3", HarmonicScalingFunctionTarget::LINEAR_OFFSET, std::vector<Json::Value>{0.0}));
     inputs_new.push_back(std::make_shared<InputMultipoleScaling>("b3", "B3", HarmonicScalingFunctionTarget::LINEAR_SLOPE, std::vector<Json::Value>{0.0}));
+
+    inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 0, "u", std::vector<Json::Value>{0}));
+    inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 1, "v", std::vector<Json::Value>{1}));
+    inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 7, "w", std::vector<Json::Value>{0}));
+    inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "end", 7, "w", std::vector<Json::Value>{0}));
 
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs_new, outputs, model_handler);
