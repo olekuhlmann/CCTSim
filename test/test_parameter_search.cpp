@@ -7,6 +7,7 @@
 #include "output_criterion_interface.h"
 #include "output_a_multipole.hh"
 #include "output_b_multipole.hh"
+#include "output_max_curvature.hh"
 #include "constants.h"
 #include "model_handler.h"
 #include "model_calculator.h"
@@ -15,6 +16,8 @@
 #include <fstream>
 #include <sstream>
 #include <typeindex>
+#include <output_max_z.hh>
+#include <output_min_z.hh>
 
 class TestableParameterSearch : public ParameterSearch {
 public:
@@ -99,6 +102,26 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
         TestableParameterSearch search(inputs_new, outputs, model_handler);
     });
 }
+
+// have all different outputs in here
+TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput) {
+    std::string modelPath = TEST_DATA_DIR + "quad_test_B3_linear.json";
+
+    // Create model handler
+    CCTools::ModelHandler model_handler = CCTools::ModelHandler(modelPath);
+
+    std::vector<std::shared_ptr<OutputCriterionInterface>> outputs_new = outputs;
+
+    outputs_new.push_back(std::make_shared<OutputMaxCurvature>());
+    outputs_new.push_back(std::make_shared<OutputMaxZ>());
+    outputs_new.push_back(std::make_shared<OutputMinZ>());
+
+    EXPECT_NO_THROW({
+        TestableParameterSearch search(inputs, outputs_new, model_handler);
+    });
+
+}
+
 
 TEST_F(ParameterSearchTest, RunDoesNotThrowWithCorrectInputs) {
     // Adjust inputs and outputs for this test
@@ -219,7 +242,7 @@ TEST_F(ParameterSearchTest, GetNumStepsYieldsCorrectValue) {
 TEST_F(ParameterSearchTest, GetRequiredCalculationsGivesCorrectHandlers) {
     auto requiredCalculations = parameterSearch->getRequiredCalculations(outputs);
 
-    // Should contain only HarmonicsDataHandler
+    // Should contain HarmonicsDataHandler
     EXPECT_EQ(requiredCalculations.size(), 1);
     EXPECT_EQ(requiredCalculations[0], std::type_index(typeid(CCTools::HarmonicsDataHandler)));
 }
