@@ -113,8 +113,14 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput) {
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputs_new = outputs;
 
     outputs_new.push_back(std::make_shared<OutputMaxCurvature>());
+    
+    Cube3DFactory cube_factory(56, 74, 56, 27, 52, 55);
+    outputs_new.push_back(std::make_shared<OutputMaxCurvature>(cube_factory));
+
+
     outputs_new.push_back(std::make_shared<OutputMaxZ>());
     outputs_new.push_back(std::make_shared<OutputMinZ>());
+
 
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs, outputs_new, model_handler);
