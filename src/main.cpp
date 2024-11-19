@@ -19,7 +19,7 @@ int main()
 {
 
     // Set path to model file
-    std::string model_path = DATA_DIR_PATH + "model_edge_regression_test_v1.json";
+    std::string model_path = DATA_DIR_PATH + "model_edge_regression_test_v2.json";
     CCTools::ModelHandler modelHandler(model_path);
 
     // Set input parameters
@@ -34,7 +34,7 @@ int main()
     // // add the a1 multipole
     // inputs.push_back(std::make_shared<InputParamRangeInterface>(InputMultipoleScaling("a1", "A1", HarmonicScalingFunctionTarget::CONST, JsonRange::double_linear(0.1, 0.2, 5000))));
 
-    inputs.push_back(std::make_shared<InputPathConnectV2Value>(InputPathConnectV2Value("cable out", "end", 4, "w", JsonRange::double_linear(-0.5, 0, 510e3))));
+    inputs.push_back(std::make_shared<InputPathConnectV2Value>(InputPathConnectV2Value("cable out", "start", 4, "w", JsonRange::double_linear(-1, 5, 15e3))));
 
 
     // Set output parameters

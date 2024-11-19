@@ -15,6 +15,7 @@ ParameterSearch::ParameterSearch(std::vector<std::shared_ptr<InputParamRangeInte
 void ParameterSearch::run()
 {
     Logger::info("=== Starting parameter search ===");
+    Logger::info("Model file: " +  modelHandler_.getTempJsonPath().filename().string());
 
     // Initialize the output file
     std::string output_file_path = initOutputFile();
