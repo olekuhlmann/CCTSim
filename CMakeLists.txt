@@ -66,6 +66,11 @@ add_executable(cctsim_main ${CMAKE_SOURCE_DIR}/src/main.cpp ${CCTSIM_SOURCES})
 target_include_directories(cctsim_main PRIVATE)
 target_link_libraries(cctsim_main PRIVATE CCTools)
 
+# Create the example executable
+add_executable(cctsim_example ${CMAKE_SOURCE_DIR}/examples/example.cpp ${CCTSIM_SOURCES})
+target_include_directories(cctsim_example PRIVATE)
+target_link_libraries(cctsim_example PRIVATE CCTools)
+
 
 # Get all test files in test directory
 file(GLOB CCTSIM_TEST_SOURCES "test/*.cpp")
