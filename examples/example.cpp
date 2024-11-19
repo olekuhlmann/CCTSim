@@ -17,6 +17,7 @@
 
 int main()
 {
+
     // Set path to model file
     std::string model_path =  "../examples/cct.json";
 
@@ -27,13 +28,19 @@ int main()
 
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputs;
 
-    // add the b1 multipole
-    inputs.push_back(std::make_shared<InputParamRangeInterface>(InputMultipoleScaling("b1", "B1", HarmonicScalingFunctionTarget::CONST, JsonRange::double_linear(0.1, 0.2, 500))));
+    // Pitch of inner layer
+    InputLayerPitch pitch_inner("custom cct inner", JsonRange::double_linear(3.6, 3.8, 100), "_inner");
+
+    inputs.push_back(std::make_shared<InputParamRangeInterface>(pitch_inner));
 
 
     // Set output parameters
 
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputs;
+
+    // Min and max z value
+    outputs.push_back(std::make_shared<OutputMinZ>(OutputMinZ()));
+    outputs.push_back(std::make_shared<OutputMaxZ>(OutputMaxZ()));
 
     // Add all a_n
     for (size_t i = 1; i <= 10; i++)
@@ -45,6 +52,7 @@ int main()
     {
         outputs.push_back(std::make_shared<OutputBMultipole>(OutputBMultipole(i)));
     }
+
 
     // Run grid search
     ParameterSearch search(inputs, outputs, modelHandler);
