@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classInputParamRangeInterface.html" title="Interface for input parameter ranges." alt="" coords="5,56,200,83"/>
-<area shape="rect" id="node2" href="$classInputLayerPitch.html" title=" " alt="" coords="281,5,404,32"/>
-<area shape="rect" id="node3" href="$classInputMultipoleScaling.html" title=" " alt="" coords="261,56,424,83"/>
-<area shape="rect" id="node4" href="$classInputPathConnectV2Value.html" title=" " alt="" coords="248,107,437,133"/>
+<area shape="rect" id="node2" href="$classInputLayerPitch.html" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="281,5,404,32"/>
+<area shape="rect" id="node3" href="$classInputMultipoleScaling.html" title="Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an in..." alt="" coords="261,56,424,83"/>
+<area shape="rect" id="node4" href="$classInputPathConnectV2Value.html" title="Class for defining one value of a Connect V2 path connector in the CCT as an input parameter." alt="" coords="248,107,437,133"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="InputLayerPitch" name="InputLayerPitch">
-<area shape="rect" id="node1" title=" " alt="" coords="41,80,164,107"/>
+<area shape="rect" id="node1" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="41,80,164,107"/>
 <area shape="rect" id="node2" href="$classInputParamRangeInterface.html" title="Interface for input parameter ranges." alt="" coords="5,5,200,32"/>
 </map>

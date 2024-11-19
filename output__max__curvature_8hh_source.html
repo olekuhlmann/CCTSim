@@ -93,64 +93,63 @@ $(document).ready(function(){initNavTree('output__max__curvature_8hh_source.html
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cube3d__factory_8hh.html">cube3d_factory.hh</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;json/json.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOutputMaxCurvature.html">OutputMaxCurvature</a> : <span class="keyword">public</span> <a class="code" href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">   19</a></span>&#160;    <a class="code" href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">OutputMaxCurvature</a>()</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        setup();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">   33</a></span>&#160;    <a class="code" href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">OutputMaxCurvature</a>(<a class="code" href="classCube3DFactory.html">Cube3DFactory</a> &amp;filter_cube, std::string column_suffix=<span class="stringliteral">&quot;&quot;</span>) : filter_cube_(filter_cube.getCube())</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        setup();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> += column_suffix;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">   39</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">computeCriterion</a>(std::vector&lt;std::shared_ptr&lt;CCTools::CalcResultHandlerBase&gt;&gt; calcResults)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Assert that the passed calculation result handlers are of the correct type</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">checkCalcResultHandlerTypes</a>(calcResults))</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Calculation result handlers of the wrong type have been passed to the max curvature criterion.&quot;</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">// Extract the mesh data handler from the calculation result handlers</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">auto</span> mesh_data_handler = std::dynamic_pointer_cast&lt;CCTools::MeshDataHandler&gt;(calcResults[0]);</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOutputMaxCurvature.html">OutputMaxCurvature</a> : <span class="keyword">public</span> <a class="code" href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">   22</a></span>&#160;    <a class="code" href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">OutputMaxCurvature</a>()</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        setup();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">   36</a></span>&#160;    <a class="code" href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">OutputMaxCurvature</a>(<a class="code" href="classCube3DFactory.html">Cube3DFactory</a> &amp;filter_cube, std::string column_suffix=<span class="stringliteral">&quot;&quot;</span>) : filter_cube_(filter_cube.getCube())</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        setup();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> += column_suffix;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">   42</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">computeCriterion</a>(std::vector&lt;std::shared_ptr&lt;CCTools::CalcResultHandlerBase&gt;&gt; calcResults)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// Assert that the passed calculation result handlers are of the correct type</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">checkCalcResultHandlerTypes</a>(calcResults))</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Calculation result handlers of the wrong type have been passed to the max curvature criterion.&quot;</span>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">// Get the max curvature value</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">double</span> max_curvature;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span>(filter_cube_ != <span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            max_curvature = mesh_data_handler-&gt;getMaxCurvature(CCTools::MeshFieldComponent::MAGNITUDE, *filter_cube_);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            max_curvature = mesh_data_handler-&gt;getMaxCurvature(CCTools::MeshFieldComponent::MAGNITUDE);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">// Return the value</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> max_curvature;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> setup(){</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> = <span class="stringliteral">&quot;max_curvature_magnitude&quot;</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">required_calculations_</a> = {std::type_index(<span class="keyword">typeid</span>(CCTools::MeshDataHandler))};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// Optional filter to consider only curvature values from nodes within a the specified cube.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::shared_ptr&lt;CCTools::Cube3D&gt; filter_cube_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// OUTPUT_MAX_CURVATURE_HH</span></div>
-<div class="ttc" id="aclassCube3DFactory_html"><div class="ttname"><a href="classCube3DFactory.html">Cube3DFactory</a></div><div class="ttdoc">Factory class for constructing a CCTools::Cube3D object.</div><div class="ttdef"><b>Definition:</b> cube3d_factory.hh:10</div></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">// Extract the mesh data handler from the calculation result handlers</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">auto</span> mesh_data_handler = std::dynamic_pointer_cast&lt;CCTools::MeshDataHandler&gt;(calcResults[0]);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// Get the max curvature value</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">double</span> max_curvature;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span>(filter_cube_ != <span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            max_curvature = mesh_data_handler-&gt;getMaxCurvature(CCTools::MeshFieldComponent::MAGNITUDE, *filter_cube_);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            max_curvature = mesh_data_handler-&gt;getMaxCurvature(CCTools::MeshFieldComponent::MAGNITUDE);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">// Return the value</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> max_curvature;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> setup(){</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> = <span class="stringliteral">&quot;max_curvature_magnitude&quot;</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">required_calculations_</a> = {std::type_index(<span class="keyword">typeid</span>(CCTools::MeshDataHandler))};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// Optional filter to consider only curvature values from nodes within a the specified cube.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::shared_ptr&lt;CCTools::Cube3D&gt; filter_cube_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// OUTPUT_MAX_CURVATURE_HH</span></div>
+<div class="ttc" id="aclassCube3DFactory_html"><div class="ttname"><a href="classCube3DFactory.html">Cube3DFactory</a></div><div class="ttdoc">Factory class for constructing a CCTools::Cube3D object.</div><div class="ttdef"><b>Definition:</b> cube3d_factory.hh:11</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html"><div class="ttname"><a href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div><div class="ttdoc">Interface for output criteria.</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:20</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_a13a2ef729c5a6fea45a61d3a7d5da9f3"><div class="ttname"><a href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">OutputCriterionInterface::checkCalcResultHandlerTypes</a></div><div class="ttdeci">bool checkCalcResultHandlerTypes(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Assert that the calculation result handler types match the required types.</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:61</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_a88ec410a4db8c21ad8b4e2153668f615"><div class="ttname"><a href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">OutputCriterionInterface::column_name_</a></div><div class="ttdeci">std::string column_name_</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:82</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_ac38c3dbad9b459e67d068fcf61b4775b"><div class="ttname"><a href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">OutputCriterionInterface::required_calculations_</a></div><div class="ttdeci">std::vector&lt; std::type_index &gt; required_calculations_</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:83</div></div>
-<div class="ttc" id="aclassOutputMaxCurvature_html"><div class="ttname"><a href="classOutputMaxCurvature.html">OutputMaxCurvature</a></div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:11</div></div>
-<div class="ttc" id="aclassOutputMaxCurvature_html_a00e800de193c081c2b0a00372c77eeeb"><div class="ttname"><a href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">OutputMaxCurvature::computeCriterion</a></div><div class="ttdeci">double computeCriterion(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Compute the output criterion.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:39</div></div>
-<div class="ttc" id="aclassOutputMaxCurvature_html_a603376ad759d0113f9c721b4efdb85aa"><div class="ttname"><a href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">OutputMaxCurvature::OutputMaxCurvature</a></div><div class="ttdeci">OutputMaxCurvature(Cube3DFactory &amp;filter_cube, std::string column_suffix=&quot;&quot;)</div><div class="ttdoc">Construct a new OutputMaxCurvature object with a specified filter cube.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:33</div></div>
-<div class="ttc" id="aclassOutputMaxCurvature_html_ab636aabc346f1a62ce8b48cd553ce91d"><div class="ttname"><a href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">OutputMaxCurvature::OutputMaxCurvature</a></div><div class="ttdeci">OutputMaxCurvature()</div><div class="ttdoc">Construct a new OutputMaxCurvature object.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:19</div></div>
+<div class="ttc" id="aclassOutputMaxCurvature_html"><div class="ttname"><a href="classOutputMaxCurvature.html">OutputMaxCurvature</a></div><div class="ttdoc">Class for defining the max curvature with respect to the 'magnitude' field component in the magnet as...</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:14</div></div>
+<div class="ttc" id="aclassOutputMaxCurvature_html_a00e800de193c081c2b0a00372c77eeeb"><div class="ttname"><a href="classOutputMaxCurvature.html#a00e800de193c081c2b0a00372c77eeeb">OutputMaxCurvature::computeCriterion</a></div><div class="ttdeci">double computeCriterion(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Compute the output criterion.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:42</div></div>
+<div class="ttc" id="aclassOutputMaxCurvature_html_a603376ad759d0113f9c721b4efdb85aa"><div class="ttname"><a href="classOutputMaxCurvature.html#a603376ad759d0113f9c721b4efdb85aa">OutputMaxCurvature::OutputMaxCurvature</a></div><div class="ttdeci">OutputMaxCurvature(Cube3DFactory &amp;filter_cube, std::string column_suffix=&quot;&quot;)</div><div class="ttdoc">Construct a new OutputMaxCurvature object with a specified filter cube.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:36</div></div>
+<div class="ttc" id="aclassOutputMaxCurvature_html_ab636aabc346f1a62ce8b48cd553ce91d"><div class="ttname"><a href="classOutputMaxCurvature.html#ab636aabc346f1a62ce8b48cd553ce91d">OutputMaxCurvature::OutputMaxCurvature</a></div><div class="ttdeci">OutputMaxCurvature()</div><div class="ttdoc">Construct a new OutputMaxCurvature object.</div><div class="ttdef"><b>Definition:</b> output_max_curvature.hh:22</div></div>
 <div class="ttc" id="acube3d__factory_8hh_html"><div class="ttname"><a href="cube3d__factory_8hh.html">cube3d_factory.hh</a></div></div>
 <div class="ttc" id="aoutput__criterion__interface_8h_html"><div class="ttname"><a href="output__criterion__interface_8h.html">output_criterion_interface.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -92,42 +92,42 @@ $(document).ready(function(){initNavTree('output__max__z_8hh_source.html',''); i
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;mesh_data_handler.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;json/json.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOutputMaxZ.html">OutputMaxZ</a> : <span class="keyword">public</span> <a class="code" href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">   16</a></span>&#160;    <a class="code" href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">OutputMaxZ</a>()</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> = <span class="stringliteral">&quot;z_max&quot;</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">required_calculations_</a> = {std::type_index(<span class="keyword">typeid</span>(CCTools::MeshDataHandler))};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">   22</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">computeCriterion</a>(std::vector&lt;std::shared_ptr&lt;CCTools::CalcResultHandlerBase&gt;&gt; calcResults)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="comment">// Assert that the passed calculation result handlers are of the correct type</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">checkCalcResultHandlerTypes</a>(calcResults))</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Calculation result handlers of the wrong type have been passed to the max Z criterion.&quot;</span>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="comment">// Extract the mesh data handler from the calculation result handlers</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> mesh_data_handler = std::dynamic_pointer_cast&lt;CCTools::MeshDataHandler&gt;(calcResults[0]);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">// Get the max_z value</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">auto</span> max_z = mesh_data_handler-&gt;getMinMaxZValues().second;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// Return the value</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> max_z;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// OUTPUT_MAX_Z_HH</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOutputMaxZ.html">OutputMaxZ</a> : <span class="keyword">public</span> <a class="code" href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">   20</a></span>&#160;    <a class="code" href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">OutputMaxZ</a>()</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">column_name_</a> = <span class="stringliteral">&quot;z_max&quot;</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">required_calculations_</a> = {std::type_index(<span class="keyword">typeid</span>(CCTools::MeshDataHandler))};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">   26</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">computeCriterion</a>(std::vector&lt;std::shared_ptr&lt;CCTools::CalcResultHandlerBase&gt;&gt; calcResults)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="comment">// Assert that the passed calculation result handlers are of the correct type</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">checkCalcResultHandlerTypes</a>(calcResults))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Calculation result handlers of the wrong type have been passed to the max Z criterion.&quot;</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="comment">// Extract the mesh data handler from the calculation result handlers</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">auto</span> mesh_data_handler = std::dynamic_pointer_cast&lt;CCTools::MeshDataHandler&gt;(calcResults[0]);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// Get the max_z value</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">auto</span> max_z = mesh_data_handler-&gt;getMinMaxZValues().second;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// Return the value</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> max_z;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// OUTPUT_MAX_Z_HH</span></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html"><div class="ttname"><a href="classOutputCriterionInterface.html">OutputCriterionInterface</a></div><div class="ttdoc">Interface for output criteria.</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:20</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_a13a2ef729c5a6fea45a61d3a7d5da9f3"><div class="ttname"><a href="classOutputCriterionInterface.html#a13a2ef729c5a6fea45a61d3a7d5da9f3">OutputCriterionInterface::checkCalcResultHandlerTypes</a></div><div class="ttdeci">bool checkCalcResultHandlerTypes(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Assert that the calculation result handler types match the required types.</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:61</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_a88ec410a4db8c21ad8b4e2153668f615"><div class="ttname"><a href="classOutputCriterionInterface.html#a88ec410a4db8c21ad8b4e2153668f615">OutputCriterionInterface::column_name_</a></div><div class="ttdeci">std::string column_name_</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:82</div></div>
 <div class="ttc" id="aclassOutputCriterionInterface_html_ac38c3dbad9b459e67d068fcf61b4775b"><div class="ttname"><a href="classOutputCriterionInterface.html#ac38c3dbad9b459e67d068fcf61b4775b">OutputCriterionInterface::required_calculations_</a></div><div class="ttdeci">std::vector&lt; std::type_index &gt; required_calculations_</div><div class="ttdef"><b>Definition:</b> output_criterion_interface.h:83</div></div>
-<div class="ttc" id="aclassOutputMaxZ_html"><div class="ttname"><a href="classOutputMaxZ.html">OutputMaxZ</a></div><div class="ttdef"><b>Definition:</b> output_max_z.hh:9</div></div>
-<div class="ttc" id="aclassOutputMaxZ_html_a0c618fabb5a4cfcc26a9f6a0ba297493"><div class="ttname"><a href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">OutputMaxZ::computeCriterion</a></div><div class="ttdeci">double computeCriterion(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Compute the output criterion.</div><div class="ttdef"><b>Definition:</b> output_max_z.hh:22</div></div>
-<div class="ttc" id="aclassOutputMaxZ_html_aaf93f91c0a84b62d909429bb4662faa1"><div class="ttname"><a href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">OutputMaxZ::OutputMaxZ</a></div><div class="ttdeci">OutputMaxZ()</div><div class="ttdoc">Construct a new OutputMaxZ object.</div><div class="ttdef"><b>Definition:</b> output_max_z.hh:16</div></div>
+<div class="ttc" id="aclassOutputMaxZ_html"><div class="ttname"><a href="classOutputMaxZ.html">OutputMaxZ</a></div><div class="ttdoc">Class for defining the maximum z coordinate of the model as an output criterion.</div><div class="ttdef"><b>Definition:</b> output_max_z.hh:13</div></div>
+<div class="ttc" id="aclassOutputMaxZ_html_a0c618fabb5a4cfcc26a9f6a0ba297493"><div class="ttname"><a href="classOutputMaxZ.html#a0c618fabb5a4cfcc26a9f6a0ba297493">OutputMaxZ::computeCriterion</a></div><div class="ttdeci">double computeCriterion(std::vector&lt; std::shared_ptr&lt; CCTools::CalcResultHandlerBase &gt;&gt; calcResults)</div><div class="ttdoc">Compute the output criterion.</div><div class="ttdef"><b>Definition:</b> output_max_z.hh:26</div></div>
+<div class="ttc" id="aclassOutputMaxZ_html_aaf93f91c0a84b62d909429bb4662faa1"><div class="ttname"><a href="classOutputMaxZ.html#aaf93f91c0a84b62d909429bb4662faa1">OutputMaxZ::OutputMaxZ</a></div><div class="ttdeci">OutputMaxZ()</div><div class="ttdoc">Construct a new OutputMaxZ object.</div><div class="ttdef"><b>Definition:</b> output_max_z.hh:20</div></div>
 <div class="ttc" id="aoutput__criterion__interface_8h_html"><div class="ttname"><a href="output__criterion__interface_8h.html">output_criterion_interface.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
