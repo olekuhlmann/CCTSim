@@ -53,6 +53,19 @@ To then use the software, follow these steps.
     ./bin/cctsim_main
     ```
 
+## Example
+Some example code is located at `examples/example.cpp`. 
+Running the code yields a CSV with data describing the relationship between the pitch scaling of the inner CCT layer and the min/max z coordinate of the magnet.
+The pitch scaling of a layer describes the spacing between windings, therefore also influencing the length of the magnet. The magnet is along the z-axis, thus the z coordinates decribe the length of the magnet.
+
+From the kink in the `z_min_negated` line, we can determine at which pitch scaling the inner layer becomes longer than the outer layer on the one side of the magnet. From the kink in `z_max`, we can determine the same for the other side.
+
+<div align="center">
+  <img width="684" alt="Pitch scaling of inner layer vs. Min and max z coordinates" src="https://github.com/user-attachments/assets/681bd8b7-928e-4ad3-83d8-134150b498c8">
+</div>
+
+
+
 ## Author
 
 Ole Kuhlmann  
