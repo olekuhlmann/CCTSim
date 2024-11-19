@@ -1,0 +1,8 @@
+<map id="OutputCriterionInterface" name="OutputCriterionInterface">
+<area shape="rect" id="node1" title="Interface for output criteria." alt="" coords="315,5,495,32"/>
+<area shape="rect" id="node2" href="$classOutputAMultipole.html" title=" " alt="" coords="5,80,141,107"/>
+<area shape="rect" id="node3" href="$classOutputBMultipole.html" title=" " alt="" coords="165,80,301,107"/>
+<area shape="rect" id="node4" href="$classOutputMaxCurvature.html" title=" " alt="" coords="326,80,485,107"/>
+<area shape="rect" id="node5" href="$classOutputMaxZ.html" title=" " alt="" coords="509,80,611,107"/>
+<area shape="rect" id="node6" href="$classOutputMinZ.html" title=" " alt="" coords="636,80,735,107"/>
+</map>
