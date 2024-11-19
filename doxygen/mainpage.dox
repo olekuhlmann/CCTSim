@@ -1,0 +1,23 @@
+/**
+ * @mainpage CCTSim
+ *
+ * CCTSim is a C++ application that builds upon the [CCTools Library](https://github.com/ThatTilux/CCTools) and the [RAT-Library](https://rat-gui.com/library.html) to provide simulation capabilities for canted-cosine-theta (CCT) magnet models defined in JSON. 
+ * This tool enables users to perform parameter sweeps over input ranges for specified parameters of the magnet model and compute corresponding output parameters, facilitating data generation for in-depth analysis. CCTSim is compatible with CCT magnet models created using the [RAT-GUI](https://rat-gui.com/index.html) or the [RAT-Library](https://rat-gui.com/library.html).
+ *
+ * ## Main Classes
+ *
+ * - [ParameterSearch](classParameterSearch.html): Accepts input parameters and output criteria. Runs the parameter search over the input parameters and computes the output criteria. 
+ *
+ * - [InputParamRangeInterface](classInputParamRangeInterface.html): All input parameter classes for the ParameterSearch need to implement this Interface. 
+ *
+ * - [OutputCriterionInterface](classOutputCriterionInterface.html): All output criterion classes for the ParameterSearch need to implement this Interface.
+ * 
+ * ## Supporting Classes
+ * 
+ * There are some implemented input paramter classes (`Input*.hh`) and output criterion classes (`Output*.hh`), see [Class List](annotated.html).
+ * To create a new input parameter class or output criterion class, extend the respective interfaces (see above).
+ *
+ * ## Example Code
+ *
+ * Example code showcasing core functionalities is located at `examples/example.cpp`.
+ */
