@@ -4,6 +4,10 @@
 #include "input_param_range_interface.h"
 #include <json/json.h>
 
+/**
+ * @class InputLayerPitch
+ * @brief Class for defining the pitch of one layer in the CCT as an input parameter.
+ */
 class InputLayerPitch : public InputParamRangeInterface {
 public:
 

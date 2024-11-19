@@ -4,6 +4,10 @@
 #include "input_param_range_interface.h"
 #include <json/json.h>
 
+/**
+ * @class InputPathConnectV2Value
+ * @brief Class for defining one value of a Connect V2 path connector in the CCT as an input parameter.
+ */
 class InputPathConnectV2Value : public InputParamRangeInterface
 {
 public:

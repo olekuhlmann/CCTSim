@@ -32,6 +32,10 @@ std::string to_string(HarmonicScalingFunctionTarget target) {
     }
 }
 
+/**
+ * @class InputMultipoleScaling
+ * @brief Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an input parameter.
+ */
 class InputMultipoleScaling : public InputParamRangeInterface {
 public:
 

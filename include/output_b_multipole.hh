@@ -5,6 +5,10 @@
 #include "harmonics_data_handler.h"
 #include <json/json.h>
 
+/**
+ * @class OutputBMultipole
+ * @brief Class for defining an B_n multipole of the CCT's simulated harmonics as an output criterion.
+ */
 class OutputBMultipole : public OutputCriterionInterface {
 public:
 

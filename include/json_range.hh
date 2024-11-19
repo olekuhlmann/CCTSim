@@ -4,6 +4,10 @@
 #include <vector>
 #include <json/json.h>
 
+/**
+ * @class JsonRange
+ * @brief Class for creating ranges of JSON values.
+ */
 class JsonRange
 {
 public:

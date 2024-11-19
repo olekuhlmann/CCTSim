@@ -15,6 +15,13 @@
 
 using CCTools::Logger;
 
+/**
+ * @class ParameterSearch
+ * @brief Class for running a grid search on the input parameters of a model.
+ * 
+ * This class takes a set of input parameters and output criteria and runs a grid search on the input parameters.
+ * The output criteria are computed for each step of the grid search and the results are written to a CSV file.
+ */
 class ParameterSearch
 {
 

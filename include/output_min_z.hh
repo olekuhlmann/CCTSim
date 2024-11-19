@@ -5,6 +5,10 @@
 #include "mesh_data_handler.h"
 #include <json/json.h>
 
+/**
+ * @class OutputMinZ
+ * @brief Class for defining the minimum z coordinate of the model as an output criterion.
+ */
 class OutputMinZ : public OutputCriterionInterface
 {
 public:

@@ -5,6 +5,10 @@
 #include "mesh_data_handler.h"
 #include <json/json.h>
 
+/**
+ * @class OutputMaxZ
+ * @brief Class for defining the maximum z coordinate of the model as an output criterion.
+ */
 class OutputMaxZ : public OutputCriterionInterface
 {
 public:

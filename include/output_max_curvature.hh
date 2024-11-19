@@ -6,7 +6,10 @@
 #include "cube3d_factory.hh"
 #include <json/json.h>
 
-
+/**
+ * @class OutputMaxCurvature
+ * @brief Class for defining the max curvature with respect to the 'magnitude' field component in the magnet as an output criterion.
+ */
 class OutputMaxCurvature : public OutputCriterionInterface
 {
 public:

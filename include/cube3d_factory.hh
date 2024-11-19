@@ -4,6 +4,7 @@
 #include "mesh_data_handler.h"
 
 /**
+ * @class Cube3DFactory
  * @brief Factory class for constructing a CCTools::Cube3D object.
  */
 class Cube3DFactory
