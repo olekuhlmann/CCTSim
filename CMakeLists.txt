@@ -25,7 +25,6 @@ find_package(RatModels 2.017.7 REQUIRED)
 find_package(Armadillo REQUIRED)
 find_package(Boost REQUIRED COMPONENTS filesystem)
 
-
 # find ZLIB
 if(POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
@@ -55,22 +54,21 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
-
 # Get all source files in src directory
 file(GLOB CCTSIM_SOURCES "src/*.cpp")
 list(REMOVE_ITEM CCTSIM_SOURCES "${CMAKE_SOURCE_DIR}/src/main.cpp")
 
-
-# Create the main executable
-add_executable(cctsim_main ${CMAKE_SOURCE_DIR}/src/main.cpp ${CCTSIM_SOURCES})
-target_include_directories(cctsim_main PRIVATE)
-target_link_libraries(cctsim_main PRIVATE CCTools)
+# Conditionally create the main executable if main.cpp exists
+if(EXISTS "${CMAKE_SOURCE_DIR}/src/main.cpp")
+  add_executable(cctsim_main ${CMAKE_SOURCE_DIR}/src/main.cpp ${CCTSIM_SOURCES})
+  target_include_directories(cctsim_main PRIVATE)
+  target_link_libraries(cctsim_main PRIVATE CCTools)
+endif()
 
 # Create the example executable
 add_executable(cctsim_example ${CMAKE_SOURCE_DIR}/examples/example.cpp ${CCTSIM_SOURCES})
 target_include_directories(cctsim_example PRIVATE)
 target_link_libraries(cctsim_example PRIVATE CCTools)
-
 
 # Get all test files in test directory
 file(GLOB CCTSIM_TEST_SOURCES "test/*.cpp")

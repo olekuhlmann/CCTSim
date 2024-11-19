@@ -26,3 +26,5 @@ googletest-download/
 data/*
 !data/.gitkeep
 docs
+
+src/main.cpp
