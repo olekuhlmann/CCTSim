@@ -1,8 +1,13 @@
 <map id="/home/runner/work/CCTSim/CCTSim/include/input_param_range_interface.h" name="/home/runner/work/CCTSim/CCTSim/include/input_param_range_interface.h">
-<area shape="rect" id="node1" title=" " alt="" coords="112,5,327,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,68,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="93,109,151,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="176,109,263,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="287,109,379,136"/>
-<area shape="rect" id="node6" title=" " alt="" coords="403,109,534,136"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="112,5,327,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,68,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,62,75,105,72,100,162,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="93,108,151,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,62,147,101,144,97,188,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="176,108,263,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="222,60,222,94,217,94,217,60"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="287,108,379,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="256,58,308,97,305,102,252,62"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="403,108,534,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="296,58,423,101,421,106,295,63"/>
 </map>

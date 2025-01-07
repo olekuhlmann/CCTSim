@@ -1,13 +1,23 @@
 <map id="/home/runner/work/CCTSim/CCTSim/include/output_max_z.hh" name="/home/runner/work/CCTSim/CCTSim/include/output_max_z.hh">
-<area shape="rect" id="node1" title=" " alt="" coords="431,5,631,61"/>
-<area shape="rect" id="node2" href="$output__criterion__interface_8h.html" title=" " alt="" coords="223,109,426,136"/>
-<area shape="rect" id="node10" title=" " alt="" coords="451,109,612,136"/>
-<area shape="rect" id="node11" title=" " alt="" coords="636,109,728,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,191,68,218"/>
-<area shape="rect" id="node4" title=" " alt="" coords="92,191,179,218"/>
-<area shape="rect" id="node5" title=" " alt="" coords="203,191,262,218"/>
-<area shape="rect" id="node6" title=" " alt="" coords="286,191,363,218"/>
-<area shape="rect" id="node7" title=" " alt="" coords="388,191,531,218"/>
-<area shape="rect" id="node8" title=" " alt="" coords="555,191,601,218"/>
-<area shape="rect" id="node9" title=" " alt="" coords="625,184,773,225"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="431,5,631,60"/>
+<area shape="rect" id="Node000002" href="$output__criterion__interface_8h.html" title=" " alt="" coords="223,108,426,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="469,63,366,105,364,100,467,58"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="451,108,612,133"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="534,60,534,94,529,94,529,60"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="636,108,728,133"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="579,58,651,99,648,103,576,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,189,68,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="265,136,177,156,80,184,74,186,73,181,79,179,176,151,264,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="92,189,179,214"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="298,136,177,186,175,181,296,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="203,189,262,214"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="313,136,258,182,255,178,309,131"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="286,189,363,214"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="327,134,327,175,322,175,322,134"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="388,189,531,214"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="346,131,429,179,426,184,343,136"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="555,189,601,214"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="381,131,459,150,544,179,547,180,545,185,542,184,458,156,380,136"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="625,181,773,221"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="382,131,612,178,611,183,381,136"/>
 </map>

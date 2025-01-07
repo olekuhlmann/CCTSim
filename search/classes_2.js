@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jsonrange_73',['JsonRange',['../classJsonRange.html',1,'']]]
+  ['jsonrange_0',['JsonRange',['../classJsonRange.html',1,'']]]
 ];

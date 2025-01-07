@@ -1,6 +1,9 @@
 <map id="InputParamRangeInterface" name="InputParamRangeInterface">
-<area shape="rect" id="node1" title="Interface for input parameter ranges." alt="" coords="136,5,331,32"/>
-<area shape="rect" id="node2" href="$classInputLayerPitch.html" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node3" href="$classInputMultipoleScaling.html" title="Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an in..." alt="" coords="152,80,315,107"/>
-<area shape="rect" id="node4" href="$classInputPathConnectV2Value.html" title="Class for defining one value of a Connect V2 path connector in the CCT as an input parameter." alt="" coords="339,80,528,107"/>
+<area shape="rect" id="Node000001" title="Interface for input parameter ranges." alt="" coords="136,5,331,31"/>
+<area shape="rect" id="Node000002" href="$classInputLayerPitch.html" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="5,79,128,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,38,95,81,93,76,193,34"/>
+<area shape="rect" id="Node000003" href="$classInputMultipoleScaling.html" title="Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an in..." alt="" coords="152,79,315,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,44,236,79,231,79,231,44"/>
+<area shape="rect" id="Node000004" href="$classInputPathConnectV2Value.html" title="Class for defining one value of a Connect V2 path connector in the CCT as an input parameter." alt="" coords="339,79,528,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="279,33,402,76,400,81,278,38"/>
 </map>
