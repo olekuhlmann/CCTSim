@@ -31,4 +31,22 @@ TEST_F(Cube3DFactoryTest, ConstructorAndGetterTest)
     ASSERT_NEAR(cube.y_max, 52e-3, 1e-08);
     ASSERT_NEAR(cube.z_min, 133e-3, 1e-08);
     ASSERT_NEAR(cube.z_max, 207e-3, 1e-08);
+    ASSERT_FALSE(cube.invert_cube);
+
+    // Create inverted cube
+    std::shared_ptr<Cube3DFactory> cube_factory_inverted;
+
+    ASSERT_NO_THROW({
+        cube_factory_inverted = std::make_shared<Cube3DFactory>(Cube3DFactory(56, 74, 56, 27, 52, 170, true));
+    });
+
+    std::shared_ptr<CCTools::Cube3D> cube_ptr_inverted;
+
+    ASSERT_NO_THROW({
+        cube_ptr_inverted = cube_factory_inverted->getCube();
+    });
+
+    CCTools::Cube3D cube_inverted = *cube_ptr_inverted;
+
+    ASSERT_TRUE(cube_inverted.invert_cube);
 }

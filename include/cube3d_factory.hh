@@ -18,18 +18,20 @@ public:
      * @param offset_y_plane_bottom The offset `y` value of the bottom plane (mm).
      * @param offset_y_plane_top The offset `y` value of the top plane (mm).
      * @param offset_z The offset `z` value of both planes (mm).
+     * @param invert_cube If true, the cube is considered inverted, meaning the cube spans across the entire coordinate space, excluding the area between the two planes.
      *
      * To visually set a cube, use two Plane Calculations (`top` and `bottom`) in RAT-GUI with `normal`=`y`.
      * Use the same `length1`, `length2`, offset `x` and offset `z` but different offset `y` settings in the two planes to
      * span the 3D cube between the two planes.
      */
-    Cube3DFactory(double length1, double length2, double offset_x, double offset_y_plane_bottom, double offset_y_plane_top, double offset_z) : cube_(
+    Cube3DFactory(double length1, double length2, double offset_x, double offset_y_plane_bottom, double offset_y_plane_top, double offset_z, bool invert_cube = false) : cube_(
                                                                                                                                                    (offset_x - length1 / 2) * 1e-3,
                                                                                                                                                    (offset_x + length1 / 2) * 1e-3,
                                                                                                                                                    offset_y_plane_bottom * 1e-3,
                                                                                                                                                    offset_y_plane_top * 1e-3,
                                                                                                                                                    (offset_z - length2 / 2) * 1e-3,
-                                                                                                                                                   (offset_z + length2 / 2) * 1e-3) {}
+                                                                                                                                                   (offset_z + length2 / 2) * 1e-3,
+                                                                                                                                                   invert_cube) {}
 
     /**
      * @brief Constructs a Cube3DFactory object using an existing Cube3D object.
