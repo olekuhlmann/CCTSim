@@ -11,6 +11,7 @@ var hierarchy =
       [ "OutputAMultipole", "classOutputAMultipole.html", null ],
       [ "OutputBMultipole", "classOutputBMultipole.html", null ],
       [ "OutputMaxCurvature", "classOutputMaxCurvature.html", null ],
+      [ "OutputMaxVonMises", "classOutputMaxVonMises.html", null ],
       [ "OutputMaxZ", "classOutputMaxZ.html", null ],
       [ "OutputMinZ", "classOutputMinZ.html", null ]
     ] ],

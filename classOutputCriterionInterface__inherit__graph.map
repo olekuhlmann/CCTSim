@@ -1,13 +1,15 @@
 <map id="OutputCriterionInterface" name="OutputCriterionInterface">
-<area shape="rect" id="Node000001" title="Interface for output criteria." alt="" coords="315,5,495,31"/>
-<area shape="rect" id="Node000002" href="$classOutputAMultipole.html" title="Class for defining an A_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="5,79,141,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="339,36,128,81,127,76,338,31"/>
-<area shape="rect" id="Node000003" href="$classOutputBMultipole.html" title="Class for defining an B_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="165,79,301,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="366,38,262,81,260,76,364,33"/>
-<area shape="rect" id="Node000004" href="$classOutputMaxCurvature.html" title="Class for defining the max curvature with respect to the &#39;magnitude&#39; field component in the magnet as..." alt="" coords="326,79,485,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="408,44,408,79,403,79,403,44"/>
-<area shape="rect" id="Node000005" href="$classOutputMaxZ.html" title="Class for defining the maximum z coordinate of the model as an output criterion." alt="" coords="509,79,611,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="444,34,536,76,534,81,441,39"/>
-<area shape="rect" id="Node000006" href="$classOutputMinZ.html" title="Class for defining the minimum z coordinate of the model as an output criterion." alt="" coords="636,79,735,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="464,31,641,76,639,81,463,37"/>
+<area shape="rect" id="Node000001" title="Interface for output criteria." alt="" coords="5,129,185,155"/>
+<area shape="rect" id="Node000002" href="$classOutputAMultipole.html" title="Class for defining an A_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="245,5,381,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,118,169,79,232,40,260,28,262,33,235,44,172,83,122,122"/>
+<area shape="rect" id="Node000003" href="$classOutputBMultipole.html" title="Class for defining an B_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="245,55,381,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,122,232,89,267,78,269,83,234,94,143,127"/>
+<area shape="rect" id="Node000004" href="$classOutputMaxCurvature.html" title="Class for defining the max curvature with respect to the &#39;magnitude&#39; field component in the magnet as..." alt="" coords="233,104,392,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="199,127,233,123,233,129,199,133"/>
+<area shape="rect" id="Node000005" href="$classOutputMaxVonMises.html" title="Class for defining the max Von Mises pressure (MPa) in the magnet model as an output criterion." alt="" coords="235,153,391,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="199,151,235,155,234,160,199,156"/>
+<area shape="rect" id="Node000006" href="$classOutputMaxZ.html" title="Class for defining the maximum z coordinate of the model as an output criterion." alt="" coords="261,203,364,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="146,157,234,187,272,200,271,205,232,193,144,162"/>
+<area shape="rect" id="Node000007" href="$classOutputMinZ.html" title="Class for defining the minimum z coordinate of the model as an output criterion." alt="" coords="263,252,362,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="123,161,173,199,235,237,265,249,263,254,232,242,170,204,120,166"/>
 </map>

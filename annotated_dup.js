@@ -10,6 +10,7 @@ var annotated_dup =
     [ "OutputBMultipole", "classOutputBMultipole.html", "classOutputBMultipole" ],
     [ "OutputCriterionInterface", "classOutputCriterionInterface.html", "classOutputCriterionInterface" ],
     [ "OutputMaxCurvature", "classOutputMaxCurvature.html", "classOutputMaxCurvature" ],
+    [ "OutputMaxVonMises", "classOutputMaxVonMises.html", "classOutputMaxVonMises" ],
     [ "OutputMaxZ", "classOutputMaxZ.html", "classOutputMaxZ" ],
     [ "OutputMinZ", "classOutputMinZ.html", "classOutputMinZ" ],
     [ "ParameterSearch", "classParameterSearch.html", "classParameterSearch" ]
