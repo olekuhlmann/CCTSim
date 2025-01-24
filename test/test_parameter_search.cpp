@@ -19,6 +19,7 @@
 #include <output_max_z.hh>
 #include <output_min_z.hh>
 #include <output_max_von_mises.hh>
+#include <input_cct_winding_angle.hh>
 
 class TestableParameterSearch : public ParameterSearch {
 public:
@@ -98,6 +99,9 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
     inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 1, "v", std::vector<Json::Value>{1}));
     inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 7, "w", std::vector<Json::Value>{0}));
     inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "end", 7, "w", std::vector<Json::Value>{0}));
+
+    inputs_new.push_back(std::make_shared<InputCCTWindingAngle>("custom cct inner", std::vector<Json::Value>{90}));
+
 
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs_new, outputs, model_handler);
