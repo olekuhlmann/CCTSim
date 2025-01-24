@@ -18,6 +18,7 @@
 #include <typeindex>
 #include <output_max_z.hh>
 #include <output_min_z.hh>
+#include <output_max_von_mises.hh>
 
 class TestableParameterSearch : public ParameterSearch {
 public:
@@ -120,6 +121,9 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput) {
 
     outputs_new.push_back(std::make_shared<OutputMaxZ>());
     outputs_new.push_back(std::make_shared<OutputMinZ>());
+
+    outputs_new.push_back(std::make_shared<OutputMaxVonMises>());
+
 
 
     EXPECT_NO_THROW({
