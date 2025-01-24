@@ -1,0 +1,5 @@
+<map id="InputCCTWindingAngle" name="InputCCTWindingAngle">
+<area shape="rect" id="Node000001" title="Class for defining the CCT winding angle in the CCT as an input parameter." alt="" coords="17,79,188,104"/>
+<area shape="rect" id="Node000002" href="$classInputParamRangeInterface.html" title="Interface for input parameter ranges." alt="" coords="5,5,200,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,44,105,79,100,79,100,44"/>
+</map>

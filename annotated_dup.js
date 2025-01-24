@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "Cube3DFactory", "classCube3DFactory.html", "classCube3DFactory" ],
+    [ "InputCCTWindingAngle", "classInputCCTWindingAngle.html", "classInputCCTWindingAngle" ],
     [ "InputLayerPitch", "classInputLayerPitch.html", "classInputLayerPitch" ],
     [ "InputMultipoleScaling", "classInputMultipoleScaling.html", "classInputMultipoleScaling" ],
     [ "InputParamRangeInterface", "classInputParamRangeInterface.html", "classInputParamRangeInterface" ],

@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "Cube3DFactory", "classCube3DFactory.html", null ],
     [ "InputParamRangeInterface", "classInputParamRangeInterface.html", [
+      [ "InputCCTWindingAngle", "classInputCCTWindingAngle.html", null ],
       [ "InputLayerPitch", "classInputLayerPitch.html", null ],
       [ "InputMultipoleScaling", "classInputMultipoleScaling.html", null ],
       [ "InputPathConnectV2Value", "classInputPathConnectV2Value.html", null ]
