@@ -74,7 +74,6 @@ void ParameterSearch::checkInputParams(std::vector<std::shared_ptr<InputParamRan
         {
             modelHandler_.getValueByName(JSON_name, JSON_children, JSON_target);
         }
-
         catch (const std::runtime_error &e)
         {
             Logger::error("Invalid input parameter " + (*inputParamsRanges[i]).getColumnName() + ": " + std::string(e.what()));
