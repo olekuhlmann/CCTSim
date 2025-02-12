@@ -20,6 +20,23 @@ class InputParamRangeInterface
 public:
 
     /**
+     * @brief Apply a parameter configuration.
+     * @param model_handler The model handler.
+     * @param value The value to be applied. Usually an element from `range_`.
+     * 
+     * Apply the parameter configuration to the model handler. This will set the value of the parameter in the model handler.
+     */
+    virtual void applyParamConfig(CCTools::ModelHandler &model_handler, Json::Value value){
+        // Get JSON location of the target
+        std::string JSON_name = getJSONName();
+        std::vector<CCTools::JSONChildrenIdentifierType> JSON_children = getJSONChildren();
+        CCTools::JSONChildrenIdentifierType JSON_target = getJSONTarget();
+
+        // Apply the parameter configuration
+        model_handler.setValueByName(JSON_name, JSON_children, JSON_target, value);
+    }
+
+    /**
      * @brief Get the column name of the input range.
      * @return The column name of the as a string.
      * 

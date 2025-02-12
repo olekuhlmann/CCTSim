@@ -182,14 +182,8 @@ void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<In
     // Apply param config
     for (size_t i = 0; i < inputParamsRanges.size(); i++)
     {
-        // Get JSON location of the target
-        std::string JSON_name = (*inputParamsRanges[i]).getJSONName();
-        std::vector<CCTools::JSONChildrenIdentifierType> JSON_children = (*inputParamsRanges[i]).getJSONChildren();
-        CCTools::JSONChildrenIdentifierType JSON_target = (*inputParamsRanges[i]).getJSONTarget();
         Json::Value value = next_config[i];
-
-        // Apply the parameter configuration
-        model_handler.setValueByName(JSON_name, JSON_children, JSON_target, value);
+        inputParamsRanges[i]->applyParamConfig(model_handler, value);
     }
 
     // Log the parameter configuration
