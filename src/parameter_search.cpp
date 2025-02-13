@@ -175,7 +175,7 @@ std::vector<std::type_index> ParameterSearch::getRequiredCalculations(std::vecto
     return required_calculations;
 }
 
-void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> next_config, CCTools::ModelHandler &model_handler)
+void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> &next_config, CCTools::ModelHandler &model_handler)
 {
 
     // Apply param config
@@ -191,7 +191,7 @@ void ParameterSearch::applyParameterConfiguration(std::vector<std::shared_ptr<In
     {
         param_config_str += (*inputParamsRanges[i]).getColumnName();
         param_config_str += ": ";
-        param_config_str += next_config[i].asString();
+        param_config_str += (*inputParamsRanges[i]).getConfigAsString(next_config[i]);
         if (i != inputParamsRanges.size() - 1)
         {
             param_config_str += ", ";

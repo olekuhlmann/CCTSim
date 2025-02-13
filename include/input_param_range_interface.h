@@ -37,6 +37,17 @@ public:
     }
 
     /**
+     * @brief Convert a parameter configuration to a string.
+     * @param value The value to be converted.
+     * @return The value as a string.
+     * 
+     * Convert the parameter configuration to a string. This is used to log the parameter configuration.
+     */
+    virtual std::string getConfigAsString(Json::Value value){
+        return value.asString();
+    }
+
+    /**
      * @brief Get the column name of the input range.
      * @return The column name of the as a string.
      * 

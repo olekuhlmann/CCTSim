@@ -3,6 +3,7 @@
 
 #include "input_param_range_interface.h"
 #include <json/json.h>
+#include <rat/models/pathconnect2.hh>
 
 /**
  * @class InputPathConnectV2UVW
@@ -14,23 +15,32 @@ public:
     /**
      * @brief Construct a InputPathConnectV2UVW object.
      * @param JSON_name The 'name' field of the pathconnect2 node (rat::mdl::pathconnect2).
-     * @param uvw_configs The configurations to be applied.
+     * @param x_configs The x vectors of the uvw configurations to be applied.
+     * @param pathconnect2 The pathconnect2 node to be configured.
      * @param column_name_suffix The suffix to be added to the column name in the output file. Default column name is 'pathconnect2_uvw'.
      *
      * Initialize an InputPathConnectV2UVW object to define the uvw1 and uvw2 configurations of a pathconnect2 node.
-     * Format for items of `uvw_configs` is as follows: [uvw1(0, u), uvw1(0, v), uvw1(0, w), ... uvw1(n, w), uvw2(0, u), uvw2(0, v), uvw2(0, w), ... uvw2(n, w)]
-     * Values are to be provided in [mm] and will be converted to [m] in the JSON file.
+     * Format for items of `x_configs`, see see rat::mdl::PathConnect2:get_x0().
+     * Values of `x_configs` are to be provided in [m].
+     * Optimization variables (e.g., `is_symmetric`, `enable_w`) will be taken from the pathconnect2 node, thus it must be fully configured beforehand.
      */
-    InputPathConnectV2UVW(std::string JSON_name, const std::vector<Json::Value> &uvw_configs, std::string column_name_suffix = "")
+    InputPathConnectV2UVW(std::string JSON_name, const std::vector<Json::Value> &x_configs, rat::mdl::ShPathConnect2Pr pathconnect2, std::string column_name_suffix = "")
     {
         column_name_ = "pathconnect2_uvw" + column_name_suffix;
 
-        JSON_name_ = JSON_name; // TODO uvw1 and uvw2
+        JSON_name_ = JSON_name;
         // JSON children and JSON target variables are not used for this parameter
+        // set to dummy values so that checkInputParams() can verify the JSON path
+        JSON_children_ = {};
+        JSON_target_ = "uvw1";
 
         // for this parameter, range_ does not contain the final Json Value that can be applied.
         // before applying, the configuration must be converted to the correct JSON format
-        range_ = uvw_configs;
+        range_ = x_configs;
+
+        num_control_points_ = pathconnect2->get_order() + 1;
+        is_symmetric_ = pathconnect2->get_is_symmetric();
+        enable_w_ = pathconnect2->get_enable_w();
     }
 
     void applyParamConfig(CCTools::ModelHandler &model_handler, Json::Value value) override
@@ -45,68 +55,131 @@ public:
         model_handler.setValueByName(getJSONName(), {}, "uvw2", uvw2_config);
     }
 
+    std::string getConfigAsString(Json::Value value) override
+    {
+        // the value is an array here, convert to string
+        std::ostringstream oss;
+        oss << value;
+        return oss.str();
+    }
+
 private:
     /**
      * @brief Convert a uvw configuration to the JSON format.
-     * @param uvw_config The configuration to be converted.
+     * @param x The x vector to be converted.
      * @returns The JSON objects for uvw1 and uvw2 in a pair.
      *
-     * Converts a single uvw configuration (format: [uvw1(0, u), uvw1(0, v), uvw1(0, w), ... uvw1(n, w), uvw2(0, u), uvw2(0, v), uvw2(0, w), ... uvw2(n, w)] as Json::Value)
-     * to the JSON format to be put into the respective JSON field for these parameters ([{"u:" ..., "v": ..., "w": ...}]).
+     * Converts a x vector (format: see rat::mdl::PathConnect2:get_x0()) as Json::Value to JSON values for 'uvw1' and 'uvw2'.
+     * JSON format: ([{"u:" ..., "v": ..., "w": ...}]).
      * This configuration is to be provided in [mm] and will be converted to [m] in the JSON file.
      */
-    std::pair<Json::Value, Json::Value> convertConfig(const Json::Value &uvw_config)
+    std::pair<Json::Value, Json::Value> convertConfig(const Json::Value &x)
     {
-        if (uvw_config.size() == 0)
+        unsigned int num_vars = x.size();
+        if (num_vars == 0)
         {
-            throw std::invalid_argument("uvw_config cannot be empty");
+            throw std::invalid_argument("x cannot be empty");
         }
-
-        // 3 values for each control point, same number of control points for uvw1 and uvw2
-        if (uvw_config.size() % 6 != 0)
-        {
-            throw std::invalid_argument("uvw_config must have a length that is a multiple of 6");
-        }
-
-        // get number of control points
-        size_t num_control_points = uvw_config.size() / 6;
-
-        // convert from mm to m
-        double scaling_inverse = 1000.0;
 
         // JSON array for the configurations
         Json::Value uvw1_config(Json::arrayValue);
         Json::Value uvw2_config(Json::arrayValue);
 
-        for (Json::Value::ArrayIndex j = 0; j < num_control_points; j++)
+        // fill uvw1 and uvw2 with zeros
+        for (unsigned int i = 0; i < num_control_points_; i++)
         {
-            // Get values and convert to m
-            Json::Value u1 = uvw_config[j * 3].asDouble() / scaling_inverse;
-            Json::Value v1 = uvw_config[j * 3 + 1].asDouble() / scaling_inverse;
-            Json::Value w1 = uvw_config[j * 3 + 2].asDouble() / scaling_inverse;
-            Json::Value u2 = uvw_config[static_cast<Json::Value::ArrayIndex>(num_control_points * 3 + j * 3)].asDouble() / scaling_inverse;
-            Json::Value v2 = uvw_config[static_cast<Json::Value::ArrayIndex>(num_control_points * 3 + j * 3 + 1)].asDouble() / scaling_inverse;
-            Json::Value w2 = uvw_config[static_cast<Json::Value::ArrayIndex>(num_control_points * 3 + j * 3 + 2)].asDouble() / scaling_inverse;
-
-            // Create a JSON object for the first set of values (for uvw1)
             Json::Value point1;
-            point1["u"] = u1;
-            point1["v"] = v1;
-            point1["w"] = w1;
+            point1["u"] = 0.0;
+            point1["v"] = 0.0;
+            point1["w"] = 0.0;
 
-            // Create a JSON object for the second set of values (for uvw2)
             Json::Value point2;
-            point2["u"] = u2;
-            point2["v"] = v2;
-            point2["w"] = w2;
+            point2["u"] = 0.0;
+            point2["v"] = 0.0;
+            point2["w"] = 0.0;
 
-            // Append the JSON objects to the current configuration array
             uvw1_config.append(point1);
             uvw2_config.append(point2);
         }
 
+        // fill in uvw values from the x vector analogoue to rat::mdl::PathConnect2:set_uvw()
+        Json::Value::ArrayIndex cnt = 0;
+
+        for (Json::Value::ArrayIndex i = 1; i < 4; i++)
+        {
+            uvw1_config[i]["u"] = uvw1_config[i - 1]["u"].asDouble() + x[cnt++].asDouble();
+        }
+
+        for (Json::Value::ArrayIndex i = 4; i < num_control_points_; i++)
+        {
+            uvw1_config[i]["u"] = uvw1_config[i - 1]["u"].asDouble() + x[cnt++].asDouble();
+        }
+
+        for (Json::Value::ArrayIndex i = 4; i < num_control_points_; i++)
+        {
+            uvw1_config[i]["v"] = uvw1_config[i - 1]["v"].asDouble() + x[cnt++].asDouble();
+        }
+
+        if (enable_w_)
+        {
+            for (Json::Value::ArrayIndex i = 7; i < num_control_points_; i++)
+            {
+                uvw1_config[i]["w"] = uvw1_config[i - 1]["w"].asDouble() + x[cnt++].asDouble();
+            }
+        }
+
+        if (!is_symmetric_)
+        {
+            for (Json::Value::ArrayIndex i = 1; i < 4; i++)
+            {
+                uvw2_config[i]["u"] = uvw2_config[i - 1]["u"].asDouble() + x[cnt++].asDouble();
+            }
+
+            for (Json::Value::ArrayIndex i = 4; i < num_control_points_; i++)
+            {
+                uvw2_config[i]["u"] = uvw2_config[i - 1]["u"].asDouble() + x[cnt++].asDouble();
+            }
+
+            for (Json::Value::ArrayIndex i = 4; i < num_control_points_; i++)
+            {
+                uvw2_config[i]["v"] = uvw2_config[i - 1]["v"].asDouble() + x[cnt++].asDouble();
+            }
+
+            if (enable_w_)
+            {
+                for (Json::Value::ArrayIndex i = 7; i < num_control_points_; i++)
+                {
+                    uvw2_config[i]["w"] = uvw2_config[i - 1]["w"].asDouble() + x[cnt++].asDouble();
+                }
+            }
+        }
+        else
+        {
+            uvw2_config = uvw1_config;
+        }
+
+        if(cnt != num_vars)
+        {
+            throw std::invalid_argument("x vector has incorrect number of elements");
+        }
+
         return std::make_pair(uvw1_config, uvw2_config);
     }
+
+    /**
+     * @brief The number of control points for uvw1 (same for uvw2).
+     */
+    unsigned int num_control_points_;
+
+    /**
+     * @brief The `is_symmetric` flag of the pathconnect2 node.
+     */
+    bool is_symmetric_;
+
+    /**
+     * @brief The `enable_w` flag of the pathconnect2 node.
+     */
+    bool enable_w_;
 };
 
 #endif // INPUT_PATHCONNECTV2_UVW_HH

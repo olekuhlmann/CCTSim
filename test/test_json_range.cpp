@@ -190,7 +190,7 @@ TEST_F(JsonRangeTest, PathConnect2RangeTest){
     // create range
     std::vector<Json::Value> configs;
     ASSERT_NO_THROW({
-        configs = JsonRange::pathconnect2_range(connectV2, 10000);
+        configs = JsonRange::pathconnect2_range(connectV2, 1000);
     });
     ASSERT_EQ(configs.size(), 1000);
 

@@ -21,6 +21,10 @@
 #include <output_max_von_mises.hh>
 #include <input_cct_winding_angle.hh>
 #include <input_pathconnectv2_uvw.hh>
+#include <rat/models/modelcoil.hh>
+#include <rat/models/modelclip.hh>
+#include <json_range.hh>
+#include <output_pathconnectv2_strain_energy.hh>
 
 class TestableParameterSearch : public ParameterSearch
 {
@@ -334,6 +338,39 @@ TEST_F(ParameterSearchTest, ApplyParameterConfigurationCorrectlyUpdatesModel)
     EXPECT_DOUBLE_EQ(scalingValue_inner, config[1].asDouble());
 }
 
+// Hardcoded function for fiding connectV2 in Sextupole_V18_3_splice_V9.json
+static rat::mdl::ShPathConnect2Pr findConnectV2(rat::mdl::ShModelGroupPr model_tree)
+{
+    rat::mdl::ShPathConnect2Pr connectV2;
+    for (auto &model : model_tree->get_models())
+    {
+        if (model->get_name() == "Clip")
+        {
+            // cast to its type
+            rat::mdl::ShModelClipPr clip = std::dynamic_pointer_cast<rat::mdl::ModelClip>(model);
+            for (auto &model : clip->get_models())
+            {
+                if (model->get_name() == "Cable (Frenet-Serret)")
+                {
+                    // cast to its type
+                    rat::mdl::ShModelCoilPr model_coil = std::dynamic_pointer_cast<rat::mdl::ModelCoil>(model);
+
+                    // get the path connect2
+                    rat::mdl::ShPathPr path = model_coil->get_input_path();
+
+                    // cast to connectv2
+                    if (path->get_name() == "ConnectV2 Cable in")
+                    {
+                        connectV2 = std::dynamic_pointer_cast<rat::mdl::PathConnect2>(path);
+                        return connectV2;
+                    }
+                }
+            }
+        }
+    }
+    throw std::runtime_error("ConnectV2 not found in model");
+}
+
 // this input range has its own applyParamConfig function, therefore it's tested seperately here
 TEST_F(ParameterSearchTest, InputPathConnect2UVW_CorretlyUpdatesModel)
 {
@@ -342,6 +379,11 @@ TEST_F(ParameterSearchTest, InputPathConnect2UVW_CorretlyUpdatesModel)
 
     // Create model handler
     CCTools::ModelHandler model_handler = CCTools::ModelHandler(modelPath);
+
+    // find connectv2
+    CCTools::ModelCalculator model_calculator(model_handler.getTempJsonPath());
+    rat::mdl::ShModelGroupPr model_tree = model_calculator.get_model_tree();
+    rat::mdl::ShPathConnect2Pr connectV2 = findConnectV2(model_tree);
 
     // create configs
     Json::Value config(Json::arrayValue);
@@ -356,7 +398,7 @@ TEST_F(ParameterSearchTest, InputPathConnect2UVW_CorretlyUpdatesModel)
 
     std::vector<std::shared_ptr<InputParamRangeInterface>> inputs_new = {};
 
-    InputPathConnectV2UVW input("Connect South V2", std::vector<Json::Value>{config});
+    InputPathConnectV2UVW input("Connect South V2", std::vector<Json::Value>{config}, connectV2);
 
     // apply the config
     input.applyParamConfig(model_handler, config);
@@ -390,6 +432,38 @@ TEST_F(ParameterSearchTest, InputPathConnect2UVW_CorretlyUpdatesModel)
     EXPECT_NEAR(point2["u"].asDouble(), 0.004, 1e-6);
     EXPECT_NEAR(point2["v"].asDouble(), 0.005, 1e-6);
     EXPECT_NEAR(point2["w"].asDouble(), 0.006, 1e-6);
+}
+
+TEST_F(ParameterSearchTest, InputPathConnect2UVW_and_OutputPathConnectV2StrainEnergy){
+    // Set path to model file
+    std::string model_path = "../data/Sextupole_V18_3_splice_V9.json";
+
+    // Create model handler
+    CCTools::ModelHandler modelHandler(model_path);
+
+    // find connectV2
+    CCTools::ModelCalculator modelCalculator(modelHandler.getTempJsonPath());
+    rat::mdl::ShModelGroupPr model_tree = modelCalculator.get_model_tree();
+    rat::mdl::ShPathConnect2Pr connectV2 = findConnectV2(model_tree);
+
+    // Set input parameters
+
+    std::vector<std::shared_ptr<InputParamRangeInterface>> inputs;
+
+    // this always gives the standard config whe length is 1
+    std::vector<Json::Value> default_uvw_config = JsonRange::pathconnect2_range(connectV2, 1);
+
+    InputPathConnectV2UVW input("ConnectV2 Cable in", default_uvw_config, connectV2);
+    OutputPathConnectV2StrainEnergy output(modelCalculator, findConnectV2);
+
+    // apply the config
+    input.applyParamConfig(modelHandler, default_uvw_config[0]);
+
+    // compute
+    double strain_energy = output.computeCriterion({});
+
+    // value from actual optimization implementation in main.cpp
+    ASSERT_NEAR(strain_energy, 7.54e2, 1e-6); 
 }
 
 TEST_F(ParameterSearchTest, ComputeCriteriaReturnsVectorOfCorrectSize)
