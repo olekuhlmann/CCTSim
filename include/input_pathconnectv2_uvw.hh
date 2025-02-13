@@ -25,7 +25,7 @@ public:
     {
         column_name_ = "pathconnect2_uvw" + column_name_suffix;
 
-        JSON_name_ = JSON_name; // TODO uvw1 and uvw2
+        JSON_name_ = JSON_name;
         // JSON children and JSON target variables are not used for this parameter
 
         // for this parameter, range_ does not contain the final Json Value that can be applied.
