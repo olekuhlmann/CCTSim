@@ -3,10 +3,52 @@
 #include <json/json.h>
 #include <vector>
 #include <limits>
+#include <rat/models/pathconnect2.hh>
+#include <rat/models/modelgroup.hh>
+#include <rat/models/modelcoil.hh>
+#include <rat/models/modelclip.hh>
+#include <constants.h>
+#include <model_handler.h>
+#include <model_calculator.h>
+
+
 
 class JsonRangeTest : public ::testing::Test {
 protected:
     // Setup and teardown can be added here if needed
+
+    // Hardcoded function for fiding connectV2 in Sextupole_V18_3_splice_V9.json
+    static rat::mdl::ShPathConnect2Pr findConnectV2(rat::mdl::ShModelGroupPr model_tree)
+    {
+        rat::mdl::ShPathConnect2Pr connectV2;
+        for (auto &model : model_tree->get_models())
+        {
+            if (model->get_name() == "Clip")
+            {
+                // cast to its type
+                rat::mdl::ShModelClipPr clip = std::dynamic_pointer_cast<rat::mdl::ModelClip>(model);
+                for (auto &model : clip->get_models())
+                {
+                    if (model->get_name() == "Cable (Frenet-Serret)")
+                    {
+                        // cast to its type
+                        rat::mdl::ShModelCoilPr model_coil = std::dynamic_pointer_cast<rat::mdl::ModelCoil>(model);
+
+                        // get the path connect2
+                        rat::mdl::ShPathPr path = model_coil->get_input_path();
+
+                        // cast to connectv2
+                        if (path->get_name() == "ConnectV2 Cable in")
+                        {
+                            connectV2 = std::dynamic_pointer_cast<rat::mdl::PathConnect2>(path);
+                            return connectV2;
+                        }
+                    }
+                }
+            }
+        }
+        throw std::runtime_error("ConnectV2 not found in model");
+    }
 };
 
 TEST_F(JsonRangeTest, DoubleLinearTest)
@@ -134,3 +176,43 @@ TEST_F(JsonRangeTest, DoubleLinearTest)
         }
     }
 }
+
+TEST_F(JsonRangeTest, PathConnect2RangeTest){
+    // SetUp
+    std::string filepath = TEST_DATA_DIR + "Sextupole_V18_3_splice_V9.json";
+    CCTools::ModelHandler modelHandler(filepath);
+    CCTools::ModelCalculator modelCalculator(modelHandler.getTempJsonPath());
+    rat::mdl::ShModelGroupPr model_tree = modelCalculator.get_model_tree();
+    rat::mdl::ShPathConnect2Pr connectV2 = JsonRangeTest::findConnectV2(model_tree);
+    std::vector<double> lb = connectV2->get_lb();
+    std::vector<double> ub = connectV2->get_ub();
+
+    // create range
+    std::vector<Json::Value> configs;
+    ASSERT_NO_THROW({
+        configs = JsonRange::pathconnect2_range(connectV2, 10000);
+    });
+    ASSERT_EQ(configs.size(), 1000);
+
+    // check that the configs are of the correct size
+    for (const auto &config : configs)
+    {
+        ASSERT_TRUE(config.isArray());
+        ASSERT_EQ(config.size() % 6, 0);
+    }
+
+    // check that the configs are within the bounds
+    for (const auto &config : configs)
+    {
+        for (Json::ArrayIndex i = 0; i < config.size(); i++)
+        {
+            double value = config[i].asDouble();
+            EXPECT_GE(value, lb[i]);
+            EXPECT_LE(value, ub[i]);
+        }
+    }
+
+    
+
+}
+

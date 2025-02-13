@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <json/json.h>
+#include <rat/models/pathconnect2.hh>
 
 /**
  * @class JsonRange
@@ -42,6 +43,38 @@ public:
         }
 
         return range;
+    }
+
+    /**
+     * @brief Create a vector of random uvw configs for a pathconnect2 node.
+     * @param pathconnect2 The pathconnect2 node.
+     * @param num_configs The number of configs to create.
+     * @return The vector of configs.
+     * 
+     * Create a set of configs from a pathconnect2 node with respect to the lower and upper bounds lb and ub.
+     * It is advisable to set `symmetric`, `enable_w` and the number of control points before calling this function as the format of the configs
+     * depend on these values.
+     */
+    static std::vector<Json::Value> pathconnect2_range(rat::mdl::ShPathConnect2Pr pathconnect2, size_t num_configs) {
+
+        // vector to be returned
+        std::vector<Json::Value> configs;
+
+        // get lb and ub
+        std::vector<double> lb = pathconnect2->get_lb();
+        std::vector<double> ub = pathconnect2->get_ub();
+
+        for (size_t i = 0; i < num_configs; ++i) {
+            // create a random config
+            Json::Value config(Json::arrayValue);
+            for (size_t j = 0; j < lb.size(); ++j) {
+                double value = lb[j] + static_cast<double>(rand()) / RAND_MAX * (ub[j] - lb[j]);
+                config.append(value);
+            }
+            configs.push_back(config);
+        }
+
+        return configs;
     }
 };
 
