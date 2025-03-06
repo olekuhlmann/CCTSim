@@ -1,0 +1,5 @@
+<map id="InputPathConnectV2UVW" name="InputPathConnectV2UVW">
+<area shape="rect" id="Node000001" title="Class for defining the uvw1 and uvw2 parameters of a pathconnect2 node as the input parameter." alt="" coords="10,79,195,104"/>
+<area shape="rect" id="Node000002" href="$classInputParamRangeInterface.html" title="Interface for input parameter ranges." alt="" coords="5,5,200,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,44,105,79,100,79,100,44"/>
+</map>

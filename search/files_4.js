@@ -6,5 +6,6 @@ var searchData=
   ['output_5fmax_5fcurvature_2ehh_3',['output_max_curvature.hh',['../output__max__curvature_8hh.html',1,'']]],
   ['output_5fmax_5fvon_5fmises_2ehh_4',['output_max_von_mises.hh',['../output__max__von__mises_8hh.html',1,'']]],
   ['output_5fmax_5fz_2ehh_5',['output_max_z.hh',['../output__max__z_8hh.html',1,'']]],
-  ['output_5fmin_5fz_2ehh_6',['output_min_z.hh',['../output__min__z_8hh.html',1,'']]]
+  ['output_5fmin_5fz_2ehh_6',['output_min_z.hh',['../output__min__z_8hh.html',1,'']]],
+  ['output_5fpathconnectv2_5fstrain_5fenergy_2ehh_7',['output_pathconnectv2_strain_energy.hh',['../output__pathconnectv2__strain__energy_8hh.html',1,'']]]
 ];

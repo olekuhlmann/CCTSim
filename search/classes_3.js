@@ -6,5 +6,6 @@ var searchData=
   ['outputmaxcurvature_3',['OutputMaxCurvature',['../classOutputMaxCurvature.html',1,'']]],
   ['outputmaxvonmises_4',['OutputMaxVonMises',['../classOutputMaxVonMises.html',1,'']]],
   ['outputmaxz_5',['OutputMaxZ',['../classOutputMaxZ.html',1,'']]],
-  ['outputminz_6',['OutputMinZ',['../classOutputMinZ.html',1,'']]]
+  ['outputminz_6',['OutputMinZ',['../classOutputMinZ.html',1,'']]],
+  ['outputpathconnectv2strainenergy_7',['OutputPathConnectV2StrainEnergy',['../classOutputPathConnectV2StrainEnergy.html',1,'']]]
 ];

@@ -1,7 +1,11 @@
 <map id="/home/runner/work/CCTSim/CCTSim/include/json_range.hh" name="/home/runner/work/CCTSim/CCTSim/include/json_range.hh">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,228,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="35,93,97,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,47,83,83,79,80,102,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="121,93,213,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,44,155,80,150,83,127,47"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="112,5,335,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,68,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,48,78,90,76,85,178,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="92,93,184,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,48,163,86,159,82,201,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="208,93,412,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,44,289,82,285,86,243,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="437,93,522,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="285,43,430,87,428,92,284,48"/>
 </map>

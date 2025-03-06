@@ -107,19 +107,21 @@ Inheritance diagram for OutputCriterionInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classOutputCriterionInterface__inherit__graph.png" border="0" usemap="#aOutputCriterionInterface_inherit__map" alt="Inheritance graph"/></div>
 <map name="aOutputCriterionInterface_inherit__map" id="aOutputCriterionInterface_inherit__map">
-<area shape="rect" title="Interface for output criteria." alt="" coords="5,129,185,155"/>
-<area shape="rect" href="classOutputAMultipole.html" title="Class for defining an A_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="245,5,381,31"/>
-<area shape="poly" title=" " alt="" coords="119,118,169,79,232,40,260,28,262,33,235,44,172,83,122,122"/>
-<area shape="rect" href="classOutputBMultipole.html" title="Class for defining an B_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="245,55,381,80"/>
-<area shape="poly" title=" " alt="" coords="141,122,232,89,267,78,269,83,234,94,143,127"/>
-<area shape="rect" href="classOutputMaxCurvature.html" title="Class for defining the max curvature with respect to the &#39;magnitude&#39; field component in the magnet as..." alt="" coords="233,104,392,129"/>
-<area shape="poly" title=" " alt="" coords="199,127,233,123,233,129,199,133"/>
-<area shape="rect" href="classOutputMaxVonMises.html" title="Class for defining the max Von Mises pressure (MPa) in the magnet model as an output criterion." alt="" coords="235,153,391,179"/>
-<area shape="poly" title=" " alt="" coords="199,151,235,155,234,160,199,156"/>
-<area shape="rect" href="classOutputMaxZ.html" title="Class for defining the maximum z coordinate of the model as an output criterion." alt="" coords="261,203,364,228"/>
-<area shape="poly" title=" " alt="" coords="146,157,234,187,272,200,271,205,232,193,144,162"/>
-<area shape="rect" href="classOutputMinZ.html" title="Class for defining the minimum z coordinate of the model as an output criterion." alt="" coords="263,252,362,277"/>
-<area shape="poly" title=" " alt="" coords="123,161,173,199,235,237,265,249,263,254,232,242,170,204,120,166"/>
+<area shape="rect" title="Interface for output criteria." alt="" coords="5,153,185,179"/>
+<area shape="rect" href="classOutputAMultipole.html" title="Class for defining an A_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="267,5,403,31"/>
+<area shape="poly" title=" " alt="" coords="114,141,164,89,196,62,232,40,266,27,268,32,235,44,199,67,167,93,118,145"/>
+<area shape="rect" href="classOutputBMultipole.html" title="Class for defining an B_n multipole of the CCT&#39;s simulated harmonics as an output criterion." alt="" coords="267,55,403,80"/>
+<area shape="poly" title=" " alt="" coords="126,144,175,116,232,89,268,78,270,83,234,94,178,120,129,148"/>
+<area shape="rect" href="classOutputMaxCurvature.html" title="Class for defining the max curvature with respect to the &#39;magnitude&#39; field component in the magnet as..." alt="" coords="255,104,414,129"/>
+<area shape="poly" title=" " alt="" coords="170,148,272,127,273,132,171,153"/>
+<area shape="rect" href="classOutputMaxVonMises.html" title="Class for defining the max Von Mises pressure (MPa) in the magnet model as an output criterion." alt="" coords="257,153,413,179"/>
+<area shape="poly" title=" " alt="" coords="199,163,256,163,256,169,199,169"/>
+<area shape="rect" href="classOutputMaxZ.html" title="Class for defining the maximum z coordinate of the model as an output criterion." alt="" coords="283,203,386,228"/>
+<area shape="poly" title=" " alt="" coords="171,179,284,202,282,207,170,184"/>
+<area shape="rect" href="classOutputMinZ.html" title="Class for defining the minimum z coordinate of the model as an output criterion." alt="" coords="285,252,384,277"/>
+<area shape="poly" title=" " alt="" coords="129,183,178,211,234,237,286,252,285,258,232,242,176,216,127,188"/>
+<area shape="rect" href="classOutputPathConnectV2StrainEnergy.html" title="Class for objective function (integrated strain energy) of a pathconnect2 optimizer as an output crit..." alt="" coords="233,302,436,342"/>
+<area shape="poly" title=" " alt="" coords="119,187,169,237,201,263,235,286,262,300,260,304,232,291,197,268,165,241,115,191"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -277,7 +279,7 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The value of the output criterion as a double.</dd></dl>
 <p>Compute the value of the output criterion. This function will be called by the parameter search object to compute the value of the output criterion for a given set of input parameters. Throws an exception of the types of the calculation results do not match the required calculation result handlers. </p>
 
-<p>Implemented in <a class="el" href="classOutputAMultipole.html#adb6c981903f681233b865fc46ed9a511">OutputAMultipole</a>, <a class="el" href="classOutputBMultipole.html#a510d4859f9b799c88f7d574bc681f4d4">OutputBMultipole</a>, <a class="el" href="classOutputMaxCurvature.html#a2e4ea9529b905cb740d0c6d4ae60e5e2">OutputMaxCurvature</a>, <a class="el" href="classOutputMaxVonMises.html#ae11fd7991964433266687efa85069e1f">OutputMaxVonMises</a>, <a class="el" href="classOutputMaxZ.html#ae0ca71994925df7df31332c8da8d4daf">OutputMaxZ</a>, and <a class="el" href="classOutputMinZ.html#af6100eefe726349068644ce579c89efd">OutputMinZ</a>.</p>
+<p>Implemented in <a class="el" href="classOutputAMultipole.html#adb6c981903f681233b865fc46ed9a511">OutputAMultipole</a>, <a class="el" href="classOutputBMultipole.html#a510d4859f9b799c88f7d574bc681f4d4">OutputBMultipole</a>, <a class="el" href="classOutputMaxCurvature.html#a2e4ea9529b905cb740d0c6d4ae60e5e2">OutputMaxCurvature</a>, <a class="el" href="classOutputMaxVonMises.html#ae11fd7991964433266687efa85069e1f">OutputMaxVonMises</a>, <a class="el" href="classOutputMaxZ.html#ae0ca71994925df7df31332c8da8d4daf">OutputMaxZ</a>, <a class="el" href="classOutputMinZ.html#af6100eefe726349068644ce579c89efd">OutputMinZ</a>, and <a class="el" href="classOutputPathConnectV2StrainEnergy.html#a4d7409eb899c998e951c336ca90aa203">OutputPathConnectV2StrainEnergy</a>.</p>
 
 </div>
 </div>

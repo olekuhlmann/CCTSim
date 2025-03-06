@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['_7einputparamrangeinterface_0',['~InputParamRangeInterface',['../classInputParamRangeInterface.html#a9eb6ddea4585420b4c99d1c27b11f321',1,'InputParamRangeInterface']]],
-  ['_7eoutputcriterioninterface_1',['~OutputCriterionInterface',['../classOutputCriterionInterface.html#a9228670611e219a3c96bc8bb8cb161d6',1,'OutputCriterionInterface']]],
-  ['_7eparametersearch_2',['~ParameterSearch',['../classParameterSearch.html#aa6bf587b98b11b3ad5ecaefd1168f779',1,'ParameterSearch']]]
+  ['run_0',['run',['../classParameterSearch.html#afcd41f00941fbcee46e8e3059c5d54cd',1,'ParameterSearch']]],
+  ['runcalculations_1',['runCalculations',['../classParameterSearch.html#a255a1569bef89fb9973d09470f6a5676',1,'ParameterSearch']]]
 ];

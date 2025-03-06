@@ -106,6 +106,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6da69cf757ad830160dd5ca17b0b780" id="r_ae6da69cf757ad830160dd5ca17b0b780"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJsonRange.html#ae6da69cf757ad830160dd5ca17b0b780">double_linear</a> (double start, double end, int num_steps)</td></tr>
 <tr class="memdesc:ae6da69cf757ad830160dd5ca17b0b780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a linear range of doubles.  <br /></td></tr>
 <tr class="separator:ae6da69cf757ad830160dd5ca17b0b780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61b8596a53083fa93b5bab0023ea3ec5" id="r_a61b8596a53083fa93b5bab0023ea3ec5"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJsonRange.html#a61b8596a53083fa93b5bab0023ea3ec5">pathconnect2_range</a> (rat::mdl::ShPathConnect2Pr pathconnect2, size_t num_configs)</td></tr>
+<tr class="memdesc:a61b8596a53083fa93b5bab0023ea3ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a vector of random uvw configs for a pathconnect2 node.  <br /></td></tr>
+<tr class="separator:a61b8596a53083fa93b5bab0023ea3ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2351fd0e225b1f969c9b4e0ff5954789" id="r_a2351fd0e225b1f969c9b4e0ff5954789"><td class="memItemLeft" align="right" valign="top">static Json::Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJsonRange.html#a2351fd0e225b1f969c9b4e0ff5954789">pathconnect2_default_config</a> (rat::mdl::ShPathConnect2Pr pathconnect2)</td></tr>
+<tr class="memdesc:a2351fd0e225b1f969c9b4e0ff5954789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the default x configuration for a pathconnect2 node.  <br /></td></tr>
+<tr class="separator:a2351fd0e225b1f969c9b4e0ff5954789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for creating ranges of JSON values. </p>
@@ -161,6 +167,89 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The linear range of doubles.</dd></dl>
 <p>Create a linear range of doubles from <code>start</code> to <code>end</code> with <code>num_steps</code> steps. Throws an exception if <code>num_steps</code> is less than 2 or if <code>start</code> &gt; <code>end</code>. </p>
+
+</div>
+</div>
+<a id="a2351fd0e225b1f969c9b4e0ff5954789" name="a2351fd0e225b1f969c9b4e0ff5954789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2351fd0e225b1f969c9b4e0ff5954789">&#9670;&#160;</a></span>pathconnect2_default_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Json::Value JsonRange::pathconnect2_default_config </td>
+          <td>(</td>
+          <td class="paramtype">rat::mdl::ShPathConnect2Pr&#160;</td>
+          <td class="paramname"><em>pathconnect2</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the default x configuration for a pathconnect2 node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pathconnect2</td><td>The pathconnect2 node. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The default x configuration in JSON.</dd></dl>
+<p>Returns the default x configuration for a pathconnect2 node. This is the configuration used when use_previous is disabled. </p>
+
+</div>
+</div>
+<a id="a61b8596a53083fa93b5bab0023ea3ec5" name="a61b8596a53083fa93b5bab0023ea3ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61b8596a53083fa93b5bab0023ea3ec5">&#9670;&#160;</a></span>pathconnect2_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt; Json::Value &gt; JsonRange::pathconnect2_range </td>
+          <td>(</td>
+          <td class="paramtype">rat::mdl::ShPathConnect2Pr&#160;</td>
+          <td class="paramname"><em>pathconnect2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>num_configs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a vector of random uvw configs for a pathconnect2 node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pathconnect2</td><td>The pathconnect2 node. </td></tr>
+    <tr><td class="paramname">num_configs</td><td>The number of configs to create. Must be at least 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The vector of configs.</dd></dl>
+<p>Create a set of configs from a pathconnect2 node with respect to the lower and upper bounds lb and ub. The first config in the returned vector is the default config used when use_previous is disabled, see <code><a class="el" href="classJsonRange.html#a2351fd0e225b1f969c9b4e0ff5954789" title="Returns the default x configuration for a pathconnect2 node.">pathconnect2_default_config()</a></code>. It is advisable to set <code>symmetric</code>, <code>enable_w</code> and the number of control points before calling this function as the format of the configs depend on these values. </p>
 
 </div>
 </div>

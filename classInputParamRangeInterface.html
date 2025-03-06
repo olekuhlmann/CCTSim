@@ -107,20 +107,28 @@ Inheritance diagram for InputParamRangeInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInputParamRangeInterface__inherit__graph.png" border="0" usemap="#aInputParamRangeInterface_inherit__map" alt="Inheritance graph"/></div>
 <map name="aInputParamRangeInterface_inherit__map" id="aInputParamRangeInterface_inherit__map">
-<area shape="rect" title="Interface for input parameter ranges." alt="" coords="247,5,441,31"/>
-<area shape="rect" href="classInputCCTWindingAngle.html" title="Class for defining the CCT winding angle in the CCT as an input parameter." alt="" coords="5,79,176,104"/>
-<area shape="poly" title=" " alt="" coords="291,37,132,81,131,76,289,32"/>
-<area shape="rect" href="classInputLayerPitch.html" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="200,79,323,104"/>
-<area shape="poly" title=" " alt="" coords="322,42,277,80,273,76,319,38"/>
-<area shape="rect" href="classInputMultipoleScaling.html" title="Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an in..." alt="" coords="347,79,509,104"/>
-<area shape="poly" title=" " alt="" coords="370,38,416,76,413,80,366,42"/>
-<area shape="rect" href="classInputPathConnectV2Value.html" title="Class for defining one value of a Connect V2 path connector in the CCT as an input parameter." alt="" coords="533,79,723,104"/>
-<area shape="poly" title=" " alt="" coords="403,31,583,76,581,81,402,37"/>
+<area shape="rect" title="Interface for input parameter ranges." alt="" coords="5,104,200,129"/>
+<area shape="rect" href="classInputCCTWindingAngle.html" title="Class for defining the CCT winding angle in the CCT as an input parameter." alt="" coords="257,5,428,31"/>
+<area shape="poly" title=" " alt="" coords="135,95,187,67,247,40,283,28,284,33,249,44,189,71,138,99"/>
+<area shape="rect" href="classInputLayerPitch.html" title="Class for defining the pitch of one layer in the CCT as an input parameter." alt="" coords="281,55,404,80"/>
+<area shape="poly" title=" " alt="" coords="178,99,281,77,282,82,179,104"/>
+<area shape="rect" href="classInputMultipoleScaling.html" title="Class for defining one parameter of the scaling function of a custom cct harmonic in the CCT as an in..." alt="" coords="261,104,424,129"/>
+<area shape="poly" title=" " alt="" coords="214,114,261,114,261,119,214,119"/>
+<area shape="rect" href="classInputPathConnectV2UVW.html" title="Class for defining the uvw1 and uvw2 parameters of a pathconnect2 node as the input parameter." alt="" coords="250,153,435,179"/>
+<area shape="poly" title=" " alt="" coords="179,130,281,151,279,156,178,135"/>
+<area shape="rect" href="classInputPathConnectV2Value.html" title="Class for defining one value of a Connect V2 path connector in the CCT as an input parameter." alt="" coords="248,203,437,228"/>
+<area shape="poly" title=" " alt="" coords="139,134,190,161,249,188,288,200,286,205,247,192,188,166,136,139"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a362d52af6514d22133d77b9a9050827e" id="r_a362d52af6514d22133d77b9a9050827e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInputParamRangeInterface.html#a362d52af6514d22133d77b9a9050827e">applyParamConfig</a> (CCTools::ModelHandler &amp;model_handler, Json::Value value)</td></tr>
+<tr class="memdesc:a362d52af6514d22133d77b9a9050827e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a parameter configuration.  <br /></td></tr>
+<tr class="separator:a362d52af6514d22133d77b9a9050827e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f47f41e4203a1f9e04cae2cebda5b6" id="r_a57f47f41e4203a1f9e04cae2cebda5b6"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInputParamRangeInterface.html#a57f47f41e4203a1f9e04cae2cebda5b6">getConfigAsString</a> (Json::Value value)</td></tr>
+<tr class="memdesc:a57f47f41e4203a1f9e04cae2cebda5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a parameter configuration to a string.  <br /></td></tr>
+<tr class="separator:a57f47f41e4203a1f9e04cae2cebda5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca985e03e9d81200f75fb4c28a0a1368" id="r_aca985e03e9d81200f75fb4c28a0a1368"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInputParamRangeInterface.html#aca985e03e9d81200f75fb4c28a0a1368">getColumnName</a> ()</td></tr>
 <tr class="memdesc:aca985e03e9d81200f75fb4c28a0a1368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the column name of the input range.  <br /></td></tr>
 <tr class="separator:aca985e03e9d81200f75fb4c28a0a1368"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,6 +220,54 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a362d52af6514d22133d77b9a9050827e" name="a362d52af6514d22133d77b9a9050827e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362d52af6514d22133d77b9a9050827e">&#9670;&#160;</a></span>applyParamConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void InputParamRangeInterface::applyParamConfig </td>
+          <td>(</td>
+          <td class="paramtype">CCTools::ModelHandler &amp;&#160;</td>
+          <td class="paramname"><em>model_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Json::Value&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply a parameter configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model_handler</td><td>The model handler. </td></tr>
+    <tr><td class="paramname">value</td><td>The value to be applied. Usually an element from <code>range_</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Apply the parameter configuration to the model handler. This will set the value of the parameter in the model handler. </p>
+
+<p>Implemented in <a class="el" href="classInputPathConnectV2UVW.html#ade0871edbcc3d402c16231d51420d995">InputPathConnectV2UVW</a>.</p>
+
+</div>
+</div>
 <a id="aca985e03e9d81200f75fb4c28a0a1368" name="aca985e03e9d81200f75fb4c28a0a1368"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca985e03e9d81200f75fb4c28a0a1368">&#9670;&#160;</a></span>getColumnName()</h2>
 
@@ -238,6 +294,44 @@ Protected Attributes</h2></td></tr>
 <p>Get the column name of the input range. </p>
 <dl class="section return"><dt>Returns</dt><dd>The column name of the as a string.</dd></dl>
 <p>Get the column name. This is the name of the column in the output file that will contain the parameter values of this criterion. </p>
+
+</div>
+</div>
+<a id="a57f47f41e4203a1f9e04cae2cebda5b6" name="a57f47f41e4203a1f9e04cae2cebda5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57f47f41e4203a1f9e04cae2cebda5b6">&#9670;&#160;</a></span>getConfigAsString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string InputParamRangeInterface::getConfigAsString </td>
+          <td>(</td>
+          <td class="paramtype">Json::Value&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a parameter configuration to a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value as a string.</dd></dl>
+<p>Convert the parameter configuration to a string. This is used to log the parameter configuration. </p>
+
+<p>Implemented in <a class="el" href="classInputPathConnectV2UVW.html#a820a08cbc166e7f74ecec010cb05e92c">InputPathConnectV2UVW</a>.</p>
 
 </div>
 </div>

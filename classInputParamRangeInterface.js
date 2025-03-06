@@ -2,7 +2,9 @@ var classInputParamRangeInterface =
 [
     [ "~InputParamRangeInterface", "classInputParamRangeInterface.html#a9eb6ddea4585420b4c99d1c27b11f321", null ],
     [ "InputParamRangeInterface", "classInputParamRangeInterface.html#a553990efc80fd108756eb40018a980dd", null ],
+    [ "applyParamConfig", "classInputParamRangeInterface.html#a362d52af6514d22133d77b9a9050827e", null ],
     [ "getColumnName", "classInputParamRangeInterface.html#aca985e03e9d81200f75fb4c28a0a1368", null ],
+    [ "getConfigAsString", "classInputParamRangeInterface.html#a57f47f41e4203a1f9e04cae2cebda5b6", null ],
     [ "getJSONChildren", "classInputParamRangeInterface.html#a9a8a36390fc369e86df480bed76e2835", null ],
     [ "getJSONName", "classInputParamRangeInterface.html#a8f12e9b10e1ebd1b7bbd3b058149fa16", null ],
     [ "getJSONTarget", "classInputParamRangeInterface.html#a796499d574b21734feb9d42702f6ec42", null ],

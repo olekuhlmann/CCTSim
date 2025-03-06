@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['run_0',['run',['../classParameterSearch.html#afcd41f00941fbcee46e8e3059c5d54cd',1,'ParameterSearch']]],
-  ['runcalculations_1',['runCalculations',['../classParameterSearch.html#a255a1569bef89fb9973d09470f6a5676',1,'ParameterSearch']]]
+  ['newl_0',['newl',['../classCustomIterationLog.html#a373915bc0b740b6fddc7c70aa08cc603',1,'CustomIterationLog']]]
 ];
