@@ -15,7 +15,7 @@ ParameterSearch::ParameterSearch(std::vector<std::shared_ptr<InputParamRangeInte
 void ParameterSearch::run()
 {
     Logger::info("=== Starting parameter search ===");
-    Logger::info("Model file: " +  modelHandler_.getTempJsonPath().filename().string());
+    Logger::info("Model file: " + modelHandler_.getTempJsonPath().filename().string());
 
     // Initialize the output file
     std::string output_file_path = initOutputFile();
@@ -34,22 +34,30 @@ void ParameterSearch::run()
     // Loop over all steps
     for (size_t step_num = 0; step_num < num_steps; step_num++)
     {
-        Logger::info("== Starting step with index " + std::to_string(step_num) + " / " + std::to_string(num_steps - 1) + " ==");
+        try
+        {
+            Logger::info("== Starting step with index " + std::to_string(step_num) + " / " + std::to_string(num_steps - 1) + " ==");
 
-        // Get the next input param configuration
-        std::vector<Json::Value> next_config = getParameterConfiguration(step_num, param_ranges);
+            // Get the next input param configuration
+            std::vector<Json::Value> next_config = getParameterConfiguration(step_num, param_ranges);
 
-        // Apply paramater configuration for the current step
-        applyParameterConfiguration(inputParamsRanges_, next_config, modelHandler_);
+            // Apply paramater configuration for the current step
+            applyParameterConfiguration(inputParamsRanges_, next_config, modelHandler_);
 
-        // Run the necessary calculations
-        std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calc_results = runCalculations(required_calculations_, modelCalculator_, modelHandler_);
+            // Run the necessary calculations
+            std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calc_results = runCalculations(required_calculations_, modelCalculator_, modelHandler_);
 
-        // Compute the output criteria
-        std::vector<double> output_values = computeCriteria(calc_results, outputCriteria_);
+            // Compute the output criteria
+            std::vector<double> output_values = computeCriteria(calc_results, outputCriteria_);
 
-        // Write the output values to the output file
-        writeStepToOutputFile(step_num, outputFile_, next_config, output_values);
+            // Write the output values to the output file
+            writeStepToOutputFile(step_num, outputFile_, next_config, output_values);
+        }
+        catch (const std::exception &e)
+        {
+            Logger::error("Error in step " + std::to_string(step_num) + ": " + e.what());
+            continue;
+        }
     }
 
     // Close the output file
@@ -282,6 +290,7 @@ std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> ParameterSearch::ru
 
 std::vector<double> ParameterSearch::computeCriteria(std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calcResults, std::vector<std::shared_ptr<OutputCriterionInterface>> outputCriteria)
 {
+
     // Return vector
     std::vector<double> output_values;
 
