@@ -58,6 +58,9 @@ public:
      * depend on these values.
      */
     static std::vector<Json::Value> pathconnect2_range(rat::mdl::ShPathConnect2Pr pathconnect2, size_t num_configs) {
+        // Seed the random number generator with the current time
+        srand(static_cast<unsigned int>(time(nullptr)));
+
         if(num_configs < 1){
             throw std::invalid_argument("num_configs must be greater than 0");
         }
@@ -68,6 +71,18 @@ public:
         // get lb and ub
         std::vector<double> lb = pathconnect2->get_lb();
         std::vector<double> ub = pathconnect2->get_ub();
+
+        // clamp ub to ell/(num_control_points+1) so the sum of u cannot be longer than ell
+        unsigned int num_control_points = pathconnect2->get_order() + 1;
+        double ell = pathconnect2->get_ell();
+        for (size_t i = 0; i < ub.size()-1; i++){ //do not clamp w
+            ub[i] = std::min(ub[i], ell / (num_control_points+1));
+        }
+        // clamp lb to -ell/(num_control_points+1)
+        for (size_t i = 0; i < lb.size()-1; i++){ //do not clamp w
+            lb[i] = std::max(lb[i], -ell / (num_control_points+1));
+        }
+
 
         configs.push_back(pathconnect2_default_config(pathconnect2));
 
