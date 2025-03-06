@@ -179,7 +179,7 @@ TEST_F(JsonRangeTest, DoubleLinearTest)
 
 TEST_F(JsonRangeTest, PathConnect2RangeTest){
     // SetUp
-    std::string filepath = TEST_DATA_DIR + "Sextupole_V18_3_splice_V9.json";
+    std::string filepath = TEST_DATA_DIR + "sext_test.json";
     CCTools::ModelHandler modelHandler(filepath);
     CCTools::ModelCalculator modelCalculator(modelHandler.getTempJsonPath());
     rat::mdl::ShModelGroupPr model_tree = modelCalculator.get_model_tree();

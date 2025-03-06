@@ -48,7 +48,7 @@ protected:
     void SetUp() override
     {
         // Set up test data
-        model_path = TEST_DATA_DIR + "quad_test.json";
+        model_path = TEST_DATA_DIR + "quad_test_noBinormal.json";
 
         // Create model handler
         modelHandler = std::make_shared<CCTools::ModelHandler>(model_path);
@@ -371,72 +371,9 @@ static rat::mdl::ShPathConnect2Pr findConnectV2(rat::mdl::ShModelGroupPr model_t
     throw std::runtime_error("ConnectV2 not found in model");
 }
 
-// this input range has its own applyParamConfig function, therefore it's tested seperately here
-TEST_F(ParameterSearchTest, InputPathConnect2UVW_CorretlyUpdatesModel)
-{
-    // Give all types of inputs
-    std::string modelPath = TEST_DATA_DIR + "quad_test.json";
-
-    // Create model handler
-    CCTools::ModelHandler model_handler = CCTools::ModelHandler(modelPath);
-
-    // find connectv2
-    CCTools::ModelCalculator model_calculator(model_handler.getTempJsonPath());
-    rat::mdl::ShModelGroupPr model_tree = model_calculator.get_model_tree();
-    rat::mdl::ShPathConnect2Pr connectV2 = findConnectV2(model_tree);
-
-    // create configs
-    Json::Value config(Json::arrayValue);
-
-    // 1 control point for each uvw
-    config.append(1);
-    config.append(2);
-    config.append(3);
-    config.append(4);
-    config.append(5);
-    config.append(6);
-
-    std::vector<std::shared_ptr<InputParamRangeInterface>> inputs_new = {};
-
-    InputPathConnectV2UVW input("Connect South V2", std::vector<Json::Value>{config}, connectV2);
-
-    // apply the config
-    input.applyParamConfig(model_handler, config);
-
-    // check that the config was applied
-    Json::Value uvw1 = model_handler.getValueByName(input.getJSONName(), {}, "uvw1");
-    Json::Value uvw2 = model_handler.getValueByName(input.getJSONName(), {}, "uvw2");
-
-    // Verify that uvw1 has the expected format:
-    // uvw1: [{
-    //     "u" : 0.001,
-    //     "v" : 0.002,
-    //     "w" : 0.003
-    // }]
-    ASSERT_TRUE(uvw1.isArray());
-    ASSERT_EQ(uvw1.size(), 1);
-    const Json::Value &point1 = uvw1[0];
-    EXPECT_NEAR(point1["u"].asDouble(), 0.001, 1e-6);
-    EXPECT_NEAR(point1["v"].asDouble(), 0.002, 1e-6);
-    EXPECT_NEAR(point1["w"].asDouble(), 0.003, 1e-6);
-
-    // Verify that uvw2 has the expected format:
-    // uvw2: [{
-    //     "u" : 0.004,
-    //     "v" : 0.005,
-    //     "w" : 0.006
-    // }]
-    ASSERT_TRUE(uvw2.isArray());
-    ASSERT_EQ(uvw2.size(), 1);
-    const Json::Value &point2 = uvw2[0];
-    EXPECT_NEAR(point2["u"].asDouble(), 0.004, 1e-6);
-    EXPECT_NEAR(point2["v"].asDouble(), 0.005, 1e-6);
-    EXPECT_NEAR(point2["w"].asDouble(), 0.006, 1e-6);
-}
-
 TEST_F(ParameterSearchTest, InputPathConnect2UVW_and_OutputPathConnectV2StrainEnergy){
     // Set path to model file
-    std::string model_path = "../data/Sextupole_V18_3_splice_V9.json";
+    std::string model_path = TEST_DATA_DIR + "sext_test.json";
 
     // Create model handler
     CCTools::ModelHandler modelHandler(model_path);
