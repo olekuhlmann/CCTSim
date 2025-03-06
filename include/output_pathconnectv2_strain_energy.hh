@@ -28,12 +28,11 @@ public:
      * For every output calculation, the model calculator will be re-loaded to extract the current model tree and
      * the pathconnect2 node will be found in the model tree using the `findConnectV2` function.
      */
-    OutputPathConnectV2StrainEnergy(CCTools::ModelCalculator model_calculator, rat::mdl::ShPathConnect2Pr (*findConnectV2)(rat::mdl::ShModelGroupPr), std::string column_suffix="") : model_calculator_(model_calculator), findConnectV2_(findConnectV2)
+    OutputPathConnectV2StrainEnergy(CCTools::ModelCalculator model_calculator, rat::mdl::ShPathConnect2Pr (*findConnectV2)(rat::mdl::ShModelGroupPr), std::string column_suffix = "") : model_calculator_(model_calculator), findConnectV2_(findConnectV2)
     {
         column_name_ = "pathconnect2_strain_energy" + column_suffix;
         required_calculations_ = {};
     }
-
 
     double computeCriterion(std::vector<std::shared_ptr<CCTools::CalcResultHandlerBase>> calcResults)
     {
@@ -49,10 +48,10 @@ public:
         rat::mdl::ShPathConnect2Pr connectV2 = findConnectV2_(model_tree);
 
         // set use_previous to true so that the strain energy is computed with configuration set in the input param range
-        connectV2->set_use_previous(true); 
+        connectV2->set_use_previous(true);
 
         // Create custom logger. Does not log anything but captures the last iteration values.
-        std::shared_ptr<CustomIterationLog> custom_logger = std::make_shared<CustomIterationLog>(); 
+        std::shared_ptr<CustomIterationLog> custom_logger = std::make_shared<CustomIterationLog>();
 
         // call the optimization
         connectV2->optimize_control_points(custom_logger);
@@ -71,11 +70,38 @@ public:
         Logger::info("Length constraint: " + std::to_string(length_constraint_value));
         Logger::info("Curvature constraint: " + std::to_string(curvature_constraint_value));
 
+        // Get the uvw configuration
+        const arma::dmat uvw1_new = connectV2->get_uvw1();
+        const arma::dmat uvw2_new = connectV2->get_uvw2();
+
+        // Log the uvw configuration
+        Logger::info("uvw1:\n" + matrix_to_string(uvw1_new));
+        Logger::info("uvw2:\n" + matrix_to_string(uvw2_new));
+
         // return fval
         return strain_energy;
     }
 
 private:
+    /**
+     * @brief Convert Armadillo matrix to a string for logging with maximum precision.
+     * @param A The Armadillo matrix.
+     * @return The string representation of the matrix.
+     */
+    static std::string matrix_to_string(const arma::dmat &A)
+    {
+        std::ostringstream oss;
+        for (arma::uword i = 0; i < A.n_rows; ++i)
+        {
+            for (arma::uword j = 0; j < A.n_cols; ++j)
+            {
+                oss << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10) << A(i, j) << " ";
+            }
+            oss << "\n";
+        }
+        return oss.str();
+    }
+
     CCTools::ModelCalculator model_calculator_;
     rat::mdl::ShPathConnect2Pr (*findConnectV2_)(rat::mdl::ShModelGroupPr);
 };
