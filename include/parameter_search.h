@@ -102,7 +102,7 @@ protected:
      *
      * Pass the parameter configuration for the step number to the model handler.
      */
-    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> next_config, CCTools::ModelHandler &model_handler);
+    static void applyParameterConfiguration(std::vector<std::shared_ptr<InputParamRangeInterface>> &inputParamsRanges, std::vector<Json::Value> &next_config, CCTools::ModelHandler &model_handler);
 
     /**
      * @brief Get the next parameter configuration.

@@ -1,6 +1,6 @@
 # CCTSim
-
-CCTSim is a C++ application that builds upon the [CCTools Library](https://github.com/ThatTilux/CCTools) and the [RAT-Library](https://rat-gui.com/library.html) to provide simulation capabilities for canted-cosine-theta (CCT) magnet models defined in JSON. This tool enables users to perform parameter sweeps over input ranges for specified parameters of the magnet model and compute corresponding output parameters, facilitating data generation for in-depth analysis. CCTSim is compatible with CCT magnet models created using the [RAT-GUI](https://rat-gui.com/index.html) or the [RAT-Library](https://rat-gui.com/library.html).
+CCTSim is a C++ application that builds upon the [CCTools](https://github.com/ThatTilux/CCTools) library and serves as a framework for systematic simulations of canted-cosine-theta (CCT) magnet models. Users can specify one or more input parameters of the CCT with corresponding parameter ranges and output parameters to be computed for every set of input parameters. The results are saved in a CSV for in-depth analysis.
+CCTSim contains a set of pre-defined input parameters and output criteria. Any input and output can be added by creating a class that derives from `CCTSim::InputParamRangeInterface` or `CCTSim::OutputCriterionInterface`, respectively.
 
 This project is part of the FCC-ee HTS4 research project at CERN.
 
@@ -55,8 +55,8 @@ To then use the software, follow these steps.
 
 ## Example
 Some example code is located at `examples/example.cpp`. 
-Running the code yields a CSV with data describing the relationship between the pitch scaling of the inner CCT layer and the min/max z coordinate of the magnet.
-The pitch scaling of a layer describes the spacing between windings, therefore also influencing the length of the magnet. The magnet is along the z-axis, thus the z coordinates decribe the length of the magnet.
+Running the code yields a CSV with data describing the relationship between the pitch scaling of the inner CCT layer and the min/max z coordinate of the given example magnet.
+The pitch scaling of a layer describes the spacing between windings, thus also influencing the length of the magnet. The magnet is along the z-axis, thus the z coordinates describe the length of the magnet.
 
 From the kink in the `z_min_negated` line, we can determine at which pitch scaling the inner layer becomes longer than the outer layer on the one side of the magnet. From the kink in `z_max`, we can determine the same for the other side.
 
@@ -69,7 +69,7 @@ From the kink in the `z_min_negated` line, we can determine at which pitch scali
 ## Author
 
 Ole Kuhlmann  
-Email: [tim.ole.kuhlmann@cern.ch](mailto:tim.ole.kuhlmann@cern.ch)  
+Email: [ole.kuhlmann@rwth-aachen.de](mailto:ole.kuhlmann@rwth-aachen.de)  
 GitHub: [ThatTilux](https://github.com/ThatTilux)
 
 ## License

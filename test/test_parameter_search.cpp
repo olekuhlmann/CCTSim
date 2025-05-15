@@ -18,27 +18,37 @@
 #include <typeindex>
 #include <output_max_z.hh>
 #include <output_min_z.hh>
+#include <output_max_von_mises.hh>
+#include <input_cct_winding_angle.hh>
+#include <input_pathconnectv2_uvw.hh>
+#include <rat/models/modelcoil.hh>
+#include <rat/models/modelclip.hh>
+#include <json_range.hh>
+#include <output_pathconnectv2_strain_energy.hh>
 
-class TestableParameterSearch : public ParameterSearch {
+class TestableParameterSearch : public ParameterSearch
+{
 public:
-    using ParameterSearch::ParameterSearch;
-    using ParameterSearch::initOutputFile;
-    using ParameterSearch::checkInputParams;
-    using ParameterSearch::getParamRanges;
-    using ParameterSearch::getNumSteps;
-    using ParameterSearch::getRequiredCalculations;
-    using ParameterSearch::getParameterConfiguration;
-    using ParameterSearch::runCalculations;
     using ParameterSearch::applyParameterConfiguration;
+    using ParameterSearch::checkInputParams;
     using ParameterSearch::computeCriteria;
+    using ParameterSearch::getNumSteps;
+    using ParameterSearch::getParameterConfiguration;
+    using ParameterSearch::getParamRanges;
+    using ParameterSearch::getRequiredCalculations;
+    using ParameterSearch::initOutputFile;
+    using ParameterSearch::ParameterSearch;
+    using ParameterSearch::runCalculations;
     using ParameterSearch::writeStepToOutputFile;
 };
 
-class ParameterSearchTest : public ::testing::Test {
+class ParameterSearchTest : public ::testing::Test
+{
 protected:
-    void SetUp() override {
+    void SetUp() override
+    {
         // Set up test data
-        model_path = TEST_DATA_DIR + "quad_test.json";
+        model_path = TEST_DATA_DIR + "quad_test_noBinormal.json";
 
         // Create model handler
         modelHandler = std::make_shared<CCTools::ModelHandler>(model_path);
@@ -50,7 +60,8 @@ protected:
 
         // Create output criteria
         outputs.clear();
-        for (size_t i = 1; i <= 10; i++) {
+        for (size_t i = 1; i <= 10; i++)
+        {
             outputs.push_back(std::make_shared<OutputAMultipole>(i));
             outputs.push_back(std::make_shared<OutputBMultipole>(i));
         }
@@ -62,7 +73,8 @@ protected:
         modelCalculator = std::make_shared<CCTools::ModelCalculator>(modelHandler->getTempJsonPath());
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
     }
 
     // Member variables
@@ -74,13 +86,15 @@ protected:
     std::shared_ptr<TestableParameterSearch> parameterSearch;
 };
 
-TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForValidInputs) {
+TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForValidInputs)
+{
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs, outputs, *modelHandler);
     });
 }
 
-TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
+TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput)
+{
     // Give all types of inputs
     std::string modelPath = TEST_DATA_DIR + "quad_test_B3_linear.json";
 
@@ -98,13 +112,18 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyInput) {
     inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "start", 7, "w", std::vector<Json::Value>{0}));
     inputs_new.push_back(std::make_shared<InputPathConnectV2Value>("Connect South V2", "end", 7, "w", std::vector<Json::Value>{0}));
 
+    inputs_new.push_back(std::make_shared<InputCCTWindingAngle>("custom cct inner", std::vector<Json::Value>{90}));
+
+    // InputPathConnectV2_UVW is explicitly tested
+
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs_new, outputs, model_handler);
     });
 }
 
 // have all different outputs in here
-TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput) {
+TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput)
+{
     std::string modelPath = TEST_DATA_DIR + "quad_test_B3_linear.json";
 
     // Create model handler
@@ -113,23 +132,22 @@ TEST_F(ParameterSearchTest, ConstructorDoesNotThrowForAnyOutput) {
     std::vector<std::shared_ptr<OutputCriterionInterface>> outputs_new = outputs;
 
     outputs_new.push_back(std::make_shared<OutputMaxCurvature>());
-    
+
     Cube3DFactory cube_factory(56, 74, 56, 27, 52, 55);
     outputs_new.push_back(std::make_shared<OutputMaxCurvature>(cube_factory));
-
 
     outputs_new.push_back(std::make_shared<OutputMaxZ>());
     outputs_new.push_back(std::make_shared<OutputMinZ>());
 
+    outputs_new.push_back(std::make_shared<OutputMaxVonMises>());
 
     EXPECT_NO_THROW({
         TestableParameterSearch search(inputs, outputs_new, model_handler);
     });
-
 }
 
-
-TEST_F(ParameterSearchTest, RunDoesNotThrowWithCorrectInputs) {
+TEST_F(ParameterSearchTest, RunDoesNotThrowWithCorrectInputs)
+{
     // Adjust inputs and outputs for this test
     std::vector<std::shared_ptr<InputParamRangeInterface>> testInputs;
     testInputs.push_back(std::make_shared<InputLayerPitch>("custom cct outer", std::vector<Json::Value>{2.05}, "_outer"));
@@ -145,11 +163,12 @@ TEST_F(ParameterSearchTest, RunDoesNotThrowWithCorrectInputs) {
     });
 }
 
-TEST_F(ParameterSearchTest, InitOutputFileCreatesFileWithCorrectFormatting) {
+TEST_F(ParameterSearchTest, InitOutputFileCreatesFileWithCorrectFormatting)
+{
     // Call initOutputFile
     std::string outputFilePath = parameterSearch->initOutputFile();
 
-    // Check that the directory exists; NOTE: the output dir may already exist before the test. 
+    // Check that the directory exists; NOTE: the output dir may already exist before the test.
     EXPECT_TRUE(std::filesystem::exists(OUTPUT_DIR_PATH));
 
     // Check that the output file exists
@@ -167,12 +186,14 @@ TEST_F(ParameterSearchTest, InitOutputFileCreatesFileWithCorrectFormatting) {
     expectedHeader << "index";
 
     // Add input parameter column names
-    for (const auto& inputParam : inputs) {
+    for (const auto &inputParam : inputs)
+    {
         expectedHeader << "," << inputParam->getColumnName();
     }
 
     // Add output criterion column names
-    for (const auto& outputCriterion : outputs) {
+    for (const auto &outputCriterion : outputs)
+    {
         expectedHeader << "," << outputCriterion->getColumnName();
     }
 
@@ -182,13 +203,15 @@ TEST_F(ParameterSearchTest, InitOutputFileCreatesFileWithCorrectFormatting) {
     outputFile.close();
 }
 
-TEST_F(ParameterSearchTest, CheckInputParamsDoesNotThrowForValidInputs) {
+TEST_F(ParameterSearchTest, CheckInputParamsDoesNotThrowForValidInputs)
+{
     EXPECT_NO_THROW({
         parameterSearch->checkInputParams(inputs);
     });
 }
 
-TEST_F(ParameterSearchTest, CheckInputParamsThrowsForInvalidInputParam) {
+TEST_F(ParameterSearchTest, CheckInputParamsThrowsForInvalidInputParam)
+{
     // Create an invalid input param
     auto invalidInput = std::make_shared<InputLayerPitch>("nonexistent layer", std::vector<Json::Value>{2.0}, "_invalid");
 
@@ -200,23 +223,25 @@ TEST_F(ParameterSearchTest, CheckInputParamsThrowsForInvalidInputParam) {
     // Expect that checkInputParams throws an exception (called in the constructor, make sure to call it explicitly anyway)
     EXPECT_THROW({
         TestableParameterSearch invalidParameterSearch(invalidInputs, outputs, *modelHandler);
-        invalidParameterSearch.checkInputParams(invalidInputs);
-    }, std::runtime_error);
+        invalidParameterSearch.checkInputParams(invalidInputs); }, std::runtime_error);
 }
 
-TEST_F(ParameterSearchTest, GetParamRangesCorrectlyExtractsRanges) {
+TEST_F(ParameterSearchTest, GetParamRangesCorrectlyExtractsRanges)
+{
     auto paramRanges = parameterSearch->getParamRanges(inputs);
 
     // The inputs vector has two input params
     EXPECT_EQ(paramRanges.size(), inputs.size());
 
     // For each input param, check that the range matches
-    for (size_t i = 0; i < inputs.size(); ++i) {
+    for (size_t i = 0; i < inputs.size(); ++i)
+    {
         EXPECT_EQ(paramRanges[i], inputs[i]->getRange());
     }
 }
 
-TEST_F(ParameterSearchTest, GetNumStepsYieldsCorrectValue) {
+TEST_F(ParameterSearchTest, GetNumStepsYieldsCorrectValue)
+{
     // Case 1: inputs as defined in SetUp
     auto paramRanges = parameterSearch->getParamRanges(inputs);
     size_t numSteps = parameterSearch->getNumSteps(paramRanges);
@@ -245,7 +270,8 @@ TEST_F(ParameterSearchTest, GetNumStepsYieldsCorrectValue) {
     EXPECT_EQ(numStepsEmptyRange, 0); // empty range, zero steps
 }
 
-TEST_F(ParameterSearchTest, GetRequiredCalculationsGivesCorrectHandlers) {
+TEST_F(ParameterSearchTest, GetRequiredCalculationsGivesCorrectHandlers)
+{
     auto requiredCalculations = parameterSearch->getRequiredCalculations(outputs);
 
     // Should contain HarmonicsDataHandler
@@ -253,11 +279,13 @@ TEST_F(ParameterSearchTest, GetRequiredCalculationsGivesCorrectHandlers) {
     EXPECT_EQ(requiredCalculations[0], std::type_index(typeid(CCTools::HarmonicsDataHandler)));
 }
 
-TEST_F(ParameterSearchTest, GetParameterConfigurationReturnsCorrectValues) {
+TEST_F(ParameterSearchTest, GetParameterConfigurationReturnsCorrectValues)
+{
     auto paramRanges = parameterSearch->getParamRanges(inputs);
     size_t numSteps = parameterSearch->getNumSteps(paramRanges);
 
-    for (size_t stepNum = 0; stepNum < numSteps; ++stepNum) {
+    for (size_t stepNum = 0; stepNum < numSteps; ++stepNum)
+    {
         auto config = parameterSearch->getParameterConfiguration(stepNum, paramRanges);
 
         // For our test case, we have two inputs
@@ -273,7 +301,8 @@ TEST_F(ParameterSearchTest, GetParameterConfigurationReturnsCorrectValues) {
     }
 }
 
-TEST_F(ParameterSearchTest, RunCalculationsReturnsCorrectHandlers) {
+TEST_F(ParameterSearchTest, RunCalculationsReturnsCorrectHandlers)
+{
     auto requiredCalculations = parameterSearch->getRequiredCalculations(outputs);
 
     // Run calculations
@@ -284,7 +313,8 @@ TEST_F(ParameterSearchTest, RunCalculationsReturnsCorrectHandlers) {
     EXPECT_EQ(std::type_index(typeid(*calcResults[0])), std::type_index(typeid(CCTools::HarmonicsDataHandler)));
 }
 
-TEST_F(ParameterSearchTest, ApplyParameterConfigurationCorrectlyUpdatesModel) {
+TEST_F(ParameterSearchTest, ApplyParameterConfigurationCorrectlyUpdatesModel)
+{
     auto paramRanges = parameterSearch->getParamRanges(inputs);
     size_t stepNum = 0;
     auto config = parameterSearch->getParameterConfiguration(stepNum, paramRanges);
@@ -308,7 +338,73 @@ TEST_F(ParameterSearchTest, ApplyParameterConfigurationCorrectlyUpdatesModel) {
     EXPECT_DOUBLE_EQ(scalingValue_inner, config[1].asDouble());
 }
 
-TEST_F(ParameterSearchTest, ComputeCriteriaReturnsVectorOfCorrectSize) {
+// Hardcoded function for fiding connectV2 in Sextupole_V18_3_splice_V9.json
+static rat::mdl::ShPathConnect2Pr findConnectV2(rat::mdl::ShModelGroupPr model_tree)
+{
+    rat::mdl::ShPathConnect2Pr connectV2;
+    for (auto &model : model_tree->get_models())
+    {
+        if (model->get_name() == "Clip")
+        {
+            // cast to its type
+            rat::mdl::ShModelClipPr clip = std::dynamic_pointer_cast<rat::mdl::ModelClip>(model);
+            for (auto &model : clip->get_models())
+            {
+                if (model->get_name() == "Cable (Frenet-Serret)")
+                {
+                    // cast to its type
+                    rat::mdl::ShModelCoilPr model_coil = std::dynamic_pointer_cast<rat::mdl::ModelCoil>(model);
+
+                    // get the path connect2
+                    rat::mdl::ShPathPr path = model_coil->get_input_path();
+
+                    // cast to connectv2
+                    if (path->get_name() == "ConnectV2 Cable in")
+                    {
+                        connectV2 = std::dynamic_pointer_cast<rat::mdl::PathConnect2>(path);
+                        return connectV2;
+                    }
+                }
+            }
+        }
+    }
+    throw std::runtime_error("ConnectV2 not found in model");
+}
+
+TEST_F(ParameterSearchTest, InputPathConnect2UVW_and_OutputPathConnectV2StrainEnergy){
+    // Set path to model file
+    std::string model_path = TEST_DATA_DIR + "sext_test.json";
+
+    // Create model handler
+    CCTools::ModelHandler modelHandler(model_path);
+
+    // find connectV2
+    CCTools::ModelCalculator modelCalculator(modelHandler.getTempJsonPath());
+    rat::mdl::ShModelGroupPr model_tree = modelCalculator.get_model_tree();
+    rat::mdl::ShPathConnect2Pr connectV2 = findConnectV2(model_tree);
+
+    // Set input parameters
+
+    std::vector<std::shared_ptr<InputParamRangeInterface>> inputs;
+
+    // this always gives the standard config whe length is 1
+    std::vector<Json::Value> default_uvw_config = JsonRange::pathconnect2_range(connectV2, 1);
+
+    InputPathConnectV2UVW input("ConnectV2 Cable in", default_uvw_config, connectV2);
+    OutputPathConnectV2StrainEnergy output(modelCalculator, findConnectV2);
+
+    // apply the config
+    input.applyParamConfig(modelHandler, default_uvw_config[0]);
+
+    // compute
+    double strain_energy = output.computeCriterion({});
+
+    // value from actual optimization implementation in main.cpp
+    ASSERT_NEAR(strain_energy, 7.54e2, 1e-6); 
+}
+
+TEST_F(ParameterSearchTest, ComputeCriteriaReturnsVectorOfCorrectSize)
+{
     auto requiredCalculations = parameterSearch->getRequiredCalculations(outputs);
     auto calcResults = parameterSearch->runCalculations(requiredCalculations, *modelCalculator, *modelHandler);
 
@@ -318,7 +414,8 @@ TEST_F(ParameterSearchTest, ComputeCriteriaReturnsVectorOfCorrectSize) {
     EXPECT_EQ(criteriaValues.size(), outputs.size());
 }
 
-TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine) {
+TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine)
+{
     // Prepare test data
 
     // Generate unique filename with timestamp
@@ -335,17 +432,19 @@ TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine) {
 
     // Write header
     testOutputFile << "index";
-    for (const auto& inputParam : inputs) {
+    for (const auto &inputParam : inputs)
+    {
         testOutputFile << "," << inputParam->getColumnName();
     }
-    for (const auto& outputCriterion : outputs) {
+    for (const auto &outputCriterion : outputs)
+    {
         testOutputFile << "," << outputCriterion->getColumnName();
     }
     testOutputFile << "\n";
 
     // Prepare input_values and output_values
     std::vector<Json::Value> input_values = {2.05 / 1000.0, 2.09 / 1000.0}; // Converted to meters
-    std::vector<double> output_values(outputs.size(), 0.0); // Dummy output values
+    std::vector<double> output_values(outputs.size(), 0.0);                 // Dummy output values
 
     // Call writeStepToOutputFile
     parameterSearch->writeStepToOutputFile(0, testOutputFile, input_values, output_values);
@@ -364,19 +463,22 @@ TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine) {
     std::vector<std::string> tokens;
     std::stringstream lineStream(line);
     std::string token;
-    while (std::getline(lineStream, token, ',')) {
+    while (std::getline(lineStream, token, ','))
+    {
         tokens.push_back(token);
     }
 
     // Prepare expected values
     std::vector<std::string> expectedTokens;
     expectedTokens.push_back("0"); // index
-    for (const auto& value : input_values) {
+    for (const auto &value : input_values)
+    {
         std::stringstream ss_value;
         ss_value << std::setprecision(17) << value.asDouble();
         expectedTokens.push_back(ss_value.str());
     }
-    for (const auto& value : output_values) {
+    for (const auto &value : output_values)
+    {
         expectedTokens.push_back("0");
     }
 
@@ -384,13 +486,17 @@ TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine) {
     EXPECT_EQ(tokens.size(), expectedTokens.size());
 
     // Compare each token
-    for (size_t i = 0; i < tokens.size(); ++i) {
+    for (size_t i = 0; i < tokens.size(); ++i)
+    {
         // For the input values, compare as doubles with a tolerance
-        if (i == 1 || i == 2) { // indices 1 and 2 are input_values
+        if (i == 1 || i == 2)
+        { // indices 1 and 2 are input_values
             double actualValue = std::stod(tokens[i]);
             double expectedValue = std::stod(expectedTokens[i]);
             EXPECT_NEAR(actualValue, expectedValue, 1e-10) << "Mismatch at token index " << i;
-        } else {
+        }
+        else
+        {
             // For index and output_values (which are zeros in this case), compare as strings
             EXPECT_EQ(tokens[i], expectedTokens[i]) << "Mismatch at token index " << i;
         }
@@ -401,4 +507,3 @@ TEST_F(ParameterSearchTest, WriteStepToOutputFileWritesCorrectlyFormattedLine) {
     // Clean up
     std::filesystem::remove(filename);
 }
-
