@@ -1,7 +1,7 @@
 /**
  * @mainpage CCTSim
  *
- * CCTSim is a C++ application that builds upon the [CCTools Library](https://github.com/ThatTilux/CCTools) and the [RAT-Library](https://rat-gui.com/library.html) to provide simulation capabilities for canted-cosine-theta (CCT) magnet models defined in JSON. 
+ * CCTSim is a C++ application that builds upon the [CCTools Library](https://github.com/olekuhlmann/CCTools) and the [RAT-Library](https://rat-gui.com/library.html) to provide simulation capabilities for canted-cosine-theta (CCT) magnet models defined in JSON. 
  * This tool enables users to perform parameter sweeps over input ranges for specified parameters of the magnet model and compute corresponding output parameters, facilitating data generation for in-depth analysis. CCTSim is compatible with CCT magnet models created using the [RAT-GUI](https://rat-gui.com/index.html) or the [RAT-Library](https://rat-gui.com/library.html).
  *
  * ## Main Classes
