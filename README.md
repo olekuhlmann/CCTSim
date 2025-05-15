@@ -70,7 +70,7 @@ From the kink in the `z_min_negated` line, we can determine at which pitch scali
 
 Ole Kuhlmann  
 Email: [ole.kuhlmann@rwth-aachen.de](mailto:ole.kuhlmann@rwth-aachen.de)  
-GitHub: [ThatTilux](https://github.com/ThatTilux)
+GitHub: [olekuhlmann](https://github.com/olekuhlmann)
 
 ## License
 
