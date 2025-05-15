@@ -1,11 +1,11 @@
 # CCTSim
-CCTSim is a C++ application that builds upon the [CCTools](https://github.com/ThatTilux/CCTools) library and serves as a framework for systematic simulations of canted-cosine-theta (CCT) magnet models. Users can specify one or more input parameters of the CCT with corresponding parameter ranges and output parameters to be computed for every set of input parameters. The results are saved in a CSV for in-depth analysis.
+CCTSim is a C++ application that builds upon the [CCTools](https://github.com/olekuhlmann/CCTools) library and serves as a framework for systematic simulations of canted-cosine-theta (CCT) magnet models. Users can specify one or more input parameters of the CCT with corresponding parameter ranges and output parameters to be computed for every set of input parameters. The results are saved in a CSV for in-depth analysis.
 CCTSim contains a set of pre-defined input parameters and output criteria. Any input and output can be added by creating a class that derives from `CCTSim::InputParamRangeInterface` or `CCTSim::OutputCriterionInterface`, respectively.
 
 This project is part of the FCC-ee HTS4 research project at CERN.
 
 ## Documentation
-The documentation of this application can be viewed [here](https://thattilux.github.io/CCTSim/).
+The documentation of this application can be viewed [here](https://olekuhlmann.github.io/CCTSim/).
 Additionally, example code showcasing core functionalities is located at `examples/example.cpp`.
 
 ## Installation
@@ -13,7 +13,7 @@ Additionally, example code showcasing core functionalities is located at `exampl
 ### Prerequisites
 **Note: This software was made for Linux.**
 
-Follow the [Prerequisites section](https://github.com/ThatTilux/CCTools/blob/main/README.md#prerequisites) from CCTools to install all necessary dependencies.
+Follow the [Prerequisites section](https://github.com/olekuhlmann/CCTools/blob/main/README.md#prerequisites) from CCTools to install all necessary dependencies.
 
 ### Building and Running CCTSim
 
@@ -21,7 +21,7 @@ To install and run this application, follow these steps. Make sure you have foll
 
 1. Clone this repository and build the software:
     ```sh
-    git clone https://github.com/ThatTilux/CCTSim.git
+    git clone https://github.com/olekuhlmann/CCTSim.git
     cd CCTSim
     mkdir build
     cd build
